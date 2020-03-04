@@ -1,0 +1,63 @@
+html {
+    font-family: Open;
+}
+
+body {
+    margin: 0;
+    padding: 0% 0%;
+}
+
+img {
+    align: middle;
+    padding:0% 10%;
+    width: 1200px;
+    
+}
+header {
+   
+}
+
+#main {
+    padding: 0% 30%;
+}
+
+.headline {
+    margin: 0px;
+    padding: 0px;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+h1 {
+    margin: 0px;
+    padding: 0px;
+    font-size: 64px;
+}
+
+h2 {
+    font-size: 56px;
+    text-align: center;
+    background-color: rgb(65, 64, 64);
+    color: white;
+}
+
+h3 {
+    text-transform: uppercase;
+    font-size: 30px;
+}
+
+h4 {
+    font-size: 28px;
+}
+.header_title{
+    margin: 0px;
+    padding: 0px;
+}
+
+ul {
+    line-height: 25px;
+}
+
+p {
+    line-height: 25px;
+}

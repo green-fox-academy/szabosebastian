@@ -1,0 +1,67 @@
+html {
+    background: url(css/topography.png);
+}
+
+body {
+    margin: 0px 0px;
+    font-family: "Consolas";
+    font-size: 18px;
+    line-height: 120%;
+}
+
+header {
+    background-color: #333333;
+    margin: 0px;
+    padding: 10px 10% 40px 10%;
+}
+
+.logo {
+    margin: auto;
+    padding: auto;
+    height: auto;
+    float: left;
+}
+
+.links {
+    margin: auto;
+    padding: 5px 0px 20px 0px;
+    float: right;
+    word-spacing: 30px;
+}
+
+.main {
+    padding: 0% 10%;
+}
+
+a {
+    color: #ff0099
+}
+
+h1 {
+    font-weight: bolder;
+    font-size: 56px;
+    margin: 100px 0px 70px 0px;
+}
+
+.myself{
+    color: #ff0099;    
+}
+
+.separator {
+    text-align: center;
+    font-size: 20px;
+    margin: 70px 0px 50px 0px;
+}
+
+.wiki {
+    font-size: 40px;
+    text-align: center;
+}
+
+h2 {
+    font-weight: bold;
+}
+
+#wiki p {
+    font-size: 16px;
+}
