@@ -1,4 +1,4 @@
-| Material        | Week       |  
+| Weak        | Material       |  
 | ------------- |:-------------:|
-| HTML, CSS and Basics    | [Week-01](https://github.com/green-fox-academy/szabosebastian/tree/master/week-01)      |
+| [Week-01](https://github.com/green-fox-academy/szabosebastian/tree/master/week-01)    |  HTML, CSS and Basics     |
 | zebra stripes | are neat      |
