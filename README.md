@@ -1,6 +1,6 @@
 |Other repositories|
 | ------------- |
-|[git-lesson-repository(https://github.com/szabosebastian/git-lesson-repository)|
+|[git-lesson-repository](https://github.com/szabosebastian/git-lesson-repository)|
 
 | WEAK        | DAY-01       | DAY-02 | DAY-03 | DAY-04 | DAY-05 |
 | ------------- |:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|
