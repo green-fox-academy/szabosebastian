@@ -1,6 +1,6 @@
 import java.util.Arrays;
 import java.util.Scanner;
-
+/*
 public class Sum {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -13,7 +13,7 @@ public class Sum {
         }
 
         System.out.println(sumFunction(myArray[]));
-    }
+    }0
 
     public static int sumFunction (int limit) {
         for (int i = 0; i < limit; i++) {
@@ -22,3 +22,4 @@ public class Sum {
         return limit;
     }
 }
+*/
