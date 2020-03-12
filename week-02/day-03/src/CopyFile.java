@@ -13,20 +13,23 @@ public class CopyFile {
         Path pathCopy = Paths.get("my-file2.txt");
         Path fileName = path.getFileName();
 
-        readfile(path,pathCopy,fileName);
+        System.out.println(readfile(path,pathCopy,fileName));
     }
-    public static void readfile (Path path, Path pathCopy, Path fileName) throws IOException {
+    public static boolean readfile (Path testPath, Path pathCopy, Path fileName) throws IOException {
 
         try {
-            List<String> lines = Files.readAllLines(path);
+            List<String> lines = Files.readAllLines(testPath);
             for (String line : lines) {
                 System.out.println(line);
             }
 
             lines.add(fileName.toString());
             Files.write(pathCopy, lines);
+
+            return true;
         }
         catch(Exception e) {
+            return false;
         }
     }
 }
