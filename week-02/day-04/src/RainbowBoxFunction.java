@@ -15,19 +15,23 @@ public class RainbowBoxFunction {
 
         int size = 320/7;
         int x = 0;
+        int y = 0;
 
         ArrayList<Color> boxColors = new ArrayList<>(Arrays.asList(Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.BLUE, new Color(75,0,130),new Color(238,130,238)));
-
-        for (Color boxColor: boxColors) {
-            squareFunction(size,x,boxColor,graphics);
-            x += size;
+        for (int i = 0; i < size; i++) {
+            for (Color boxColor: boxColors) {
+                squareFunction(size,x,y,boxColor,graphics);
+                x += size;
+            }
+            x = 0;
+            y += size;
         }
     }
 
-    public static void squareFunction(int size, int x, Color boxColor, Graphics graphics){
+    public static void squareFunction(int size, int x, int y, Color boxColor, Graphics graphics){
 
         graphics.setColor(boxColor);
-        graphics.fillRect(x, HEIGHT/2, size, size);
+        graphics.fillRect(x, y, size, size);
     }
 
     // Don't touch the code below
