@@ -16,11 +16,14 @@ public class Checkerboard {
         boolean checkRow = false;
 
         for (int i = 0; i < size; i++) {
-            checkRow = !checkRow;
+
+            checkRow =! checkRow;
+
             if (i > 0) {
                 x = 0;
                 y += size;
             }
+
             for (int j = 0; j < size; j++) {
                 if (checkRow) {
                     if (j % 2 != 0) {
