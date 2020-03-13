@@ -1,3 +1,4 @@
+
 import javax.swing.*;
 
 import java.awt.*;
@@ -6,31 +7,53 @@ import java.util.Arrays;
 
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
-public class LinePlay {
+class EnveloperStar {
     public static void mainDraw(Graphics graphics) {
 
-        int firstStartX = 0;
-        int firstStartY = 20;
-        int firstEndX = 10;
-        int firstEndY = HEIGHT;
+        int firstStartX = WIDTH/2;
+        int firstStartY = 0;
+        int firstEndX = WIDTH/2;
+        int firstEndY = HEIGHT/2;
 
-        int secondStartX = 20;
+        int secondStartX = WIDTH/2;
         int secondStartY = 0;
-        int secondEndX = WIDTH;
-        int secondEndY = 10;
+        int secondEndX = WIDTH/2;
+        int secondEndY = HEIGHT/2;
+
+        int thirdStartX = WIDTH/2;
+        int thirdStartY = HEIGHT;
+        int thirdEndX = WIDTH/2;
+        int thirdEndY = HEIGHT/2;
+
+        int fourthStartX = WIDTH/2;
+        int fourthStartY = HEIGHT;
+        int fourthEndX = WIDTH/2;
+        int fourthEndY = HEIGHT/2;
 
 
 
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < WIDTH/2/10; i++) {
             drawLineFunctionGreen(firstStartX,firstStartY,firstEndX,firstEndY,graphics);
-            firstStartY += 30;
-            firstEndX += 30;
+            firstStartY += 10;
+            firstEndX -= 10;
         }
 
-        for (int j = 0; j < 15; j++) {
-            drawLineFunctionPurple(secondStartX,secondStartY,secondEndX,secondEndY,graphics);
-            secondStartX += 30;
-            secondEndY += 30;
+        for (int j = 0; j < WIDTH/2/10; j++) {
+            drawLineFunctionGreen(secondStartX,secondStartY,secondEndX,secondEndY,graphics);
+            secondStartY += 10;
+            secondEndX += 10;
+        }
+
+        for (int k = 0; k < WIDTH/2/10; k++) {
+            drawLineFunctionGreen(thirdStartX,thirdStartY,thirdEndX,thirdEndY,graphics);
+            thirdStartY -= 10;
+            thirdEndX -= 10;
+        }
+
+        for (int l = 0; l < WIDTH/2/10; l++) {
+            drawLineFunctionGreen(fourthStartX,fourthStartY,fourthEndX,fourthEndY,graphics);
+            fourthStartY -= 10;
+            fourthEndX += 10;
         }
     }
 
@@ -47,6 +70,7 @@ public class LinePlay {
     }
 
 /*    public static void whiteFunction(int size, int x, int y, Graphics graphics) {
+
         graphics.setColor(Color.WHITE);
         graphics.fillRect(x, y, size, size);
     }*/
