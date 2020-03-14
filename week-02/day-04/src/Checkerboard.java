@@ -13,6 +13,7 @@ public class Checkerboard {
         int size = 320 / 7;
         int x = 0;
         int y = 0;
+
         boolean checkRow = false;
 
         for (int i = 0; i < size; i++) {
