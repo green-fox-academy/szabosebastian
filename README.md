@@ -5,5 +5,5 @@
 
 | WEAK        |
 | ------------- |
-| [Week-01](https://github.com/green-fox-academy/szabosebastian/tree/master/week-01)    |
-| [Week-02](https://github.com/green-fox-academy/szabosebastian/tree/master/week-02)    |
+| [Week-01](https://github.com/green-fox-academy/szabosebastian/tree/master/week-01)    || [Week-02](https://github.com/green-fox-academy/szabosebastian/tree/master/week-02)    |
+
