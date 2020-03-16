@@ -14,7 +14,7 @@ public class Factorio {
     int result = 1;
 
     for (int i = 1; i <= fact; i++) {
-      result = result*i;
+      result = result * i;
 
     }
     return result;
