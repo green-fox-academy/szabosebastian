@@ -11,8 +11,6 @@ public class map_introduction_2 {
         mysecondMap.put("978-1-60309-444-3","Red Panda and Moon Bear");
         mysecondMap.put("978-1-60309-461-0","The Lab");
 
-       // String keyOutside,valueOutside;
-
         for (String key: mysecondMap.keySet()) {
             String value = mysecondMap.get(key);
                 System.out.println(value + " (ISBN: " + key + ")");
@@ -21,8 +19,19 @@ public class map_introduction_2 {
 
         mysecondMap.remove("978-1-60309-444-3");
 
-     //   if ( mysecondMap.values() = "The Lab");
-        //mysecondMap.remove(mysecondMap.values("The Lab"));
+        String removeValue = "The Lab";
+
+        for (String value: mysecondMap.keySet()) {
+            if (removeValue.equals(mysecondMap.get(value))) {
+                mysecondMap.remove(value);
+            }
+        }
+
+        mysecondMap.put("978-1-60309-450-4","They Called Us Enemy");
+        mysecondMap.put("978-1-60309-453-5","Why Did We Trust Him?");
+
+        System.out.println(mysecondMap.get("478-0-61159-424-8"));
+        System.out.println(mysecondMap.get("978-1-60309-453-5"));
 
         System.out.println(mysecondMap);
     }
