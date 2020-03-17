@@ -5,7 +5,7 @@ public class Counter {
   int startValue;
 
   public Counter() {
-
+    this(0);
   }
 
   public Counter(int value) {
