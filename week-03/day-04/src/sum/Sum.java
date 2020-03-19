@@ -1,4 +1,4 @@
-package Sum;
+package sum;
 
 import java.util.ArrayList;
 
