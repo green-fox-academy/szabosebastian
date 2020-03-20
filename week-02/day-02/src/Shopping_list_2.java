@@ -78,20 +78,13 @@ public class Shopping_list_2 {
       }
     }
 
-    for (String bob_value : bob_list.keySet()) {
-      if (bob_value == "Potato") {
-        for (String alice_value : alice_list.keySet()) {
-          if (alice_value == "Potato") {
-            if (bob_list.get(bob_value) < alice_list.get(alice_value)) {
-              System.out.println("Alice buys more potato");
-            }
-          } else if (!alice_list.containsKey("Potato")) {
-            System.out.println("Bob buys more potato");
-          } else {
-            System.out.println("Alice buys more potato");
-          }
-        }
-      }
+     int alicePotato = alice_list.getOrDefault("Potato", 0);
+     int bobPotato = bob_list.getOrDefault("Potato", 0);
+
+    if (bobPotato > alicePotato) {
+      System.out.println("Bob has more potato");
+    } else {
+      System.out.println("Alice has more potato");
     }
 
     if (bob_list.size() > alice_list.size()) {
