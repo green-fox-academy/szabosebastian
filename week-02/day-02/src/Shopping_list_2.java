@@ -2,6 +2,14 @@ import java.util.HashMap;
 
 public class Shopping_list_2 {
   public static void main(String[] args) {
+
+    Double bobPayment = 0.0;
+    Double alicePayment = 0.0;
+
+    Integer bob_sum = 0;
+    Integer alice_sum = 0;
+
+
     HashMap<String, Double> product_price = new HashMap<String, Double>() {{
       put("Milk", 1.07);
       put("Rice", 1.59);
@@ -33,16 +41,78 @@ public class Shopping_list_2 {
       put("Tomato", 10);
     }};
 
-    for (String value:product_price.keySet()) {
-      Double price = product_price.get(value);
+
+    for (String main_value : product_price.keySet()) {
+      for (String bob_value : bob_list.keySet()) {
+        if (main_value == bob_value) {
+          bobPayment += product_price.get(main_value) * bob_list.get(bob_value);
+
+        }
+      }
     }
 
-    for (String bob_count: bob_list.keySet()) {
-      Integer bob_value = bob_list.get(bob_count);
+    System.out.println("Bob pays: " + bobPayment);
+
+    for (String main_value : product_price.keySet()) {
+      for (String alice_value : alice_list.keySet()) {
+        if (main_value == alice_value) {
+          alicePayment += product_price.get(main_value) * alice_list.get(alice_value);
+        }
+      }
     }
 
-    for (String alice_count: alice_list.keySet()) {
-      Integer alice_value = alice_list.get(alice_count);
+    System.out.println("Alice pays: " + alicePayment);
+
+
+    for (String bob_value : bob_list.keySet()) {
+      if (bob_value == "Rice") {
+        for (String alice_value : alice_list.keySet()) {
+          if (alice_value == "Rice") {
+            if (bob_list.get(bob_value) > alice_list.get(alice_value)) {
+              System.out.println("Bob buys more rice");
+            } else {
+              System.out.println("Alice buys more rice");
+            }
+          }
+        }
+      }
     }
+
+    for (String bob_value : bob_list.keySet()) {
+      if (bob_value == "Potato") {
+        for (String alice_value : alice_list.keySet()) {
+          if (alice_value == "Potato") {
+            if (bob_list.get(bob_value) < alice_list.get(alice_value)) {
+              System.out.println("Alice buys more potato");
+            }
+          } else if (!alice_list.containsKey("Potato")) {
+            System.out.println("Bob buys more potato");
+          } else {
+            System.out.println("Alice buys more potato");
+          }
+        }
+      }
+    }
+
+    if (bob_list.size() > alice_list.size()) {
+      System.out.println("Bob buys more different product");
+    } else {
+      System.out.println("Alice buys more different product");
+    }
+
+    for (String value: bob_list.keySet()) {
+      bob_sum += bob_list.get(value);
+    }
+
+    for (String value: alice_list.keySet()) {
+      alice_sum += alice_list.get(value);
+    }
+
+    if(bob_sum > alice_sum) {
+      System.out.println("Bob buys more piece of product");
+    } else {
+      System.out.println("Alice buys more piece of product");
+    }
+
   }
 }
