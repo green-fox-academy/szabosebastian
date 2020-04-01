@@ -9,6 +9,14 @@ public class Animal {
     this.thirst = thirst;
   }
 
+  public int getHunger() {
+    return hunger;
+  }
+
+  public int getThirst() {
+    return thirst;
+  }
+
   public void setHunger() {
     hunger--;
   }

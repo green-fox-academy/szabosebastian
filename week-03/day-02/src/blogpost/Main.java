@@ -6,5 +6,16 @@ public class Main {
     BlogPost textTwo = new BlogPost("Tim Urban", "Wait but why", "A popular long-form, stick-figure-illustrated blog about almost everything.", 2010 - 10 - 10);
     BlogPost textThree = new BlogPost("William Turton", "One Engineer Is Trying to Get IBM to Reckon With Trump", "Daniel Hanley, a cybersecurity engineer at IBM, doesn’t want to be the center of attention. When I asked to take his picture outside one of IBM’s New York City offices, he told me that he wasn’t really into the whole organizer profile thing.", 2017 - 03 - 28);
 
+    Blog blog = new Blog();
+
+    blog.addPost(textOne);
+    blog.addPost(textTwo);
+    blog.addPost(textThree);
+
+    System.out.println(blog.listOfBlogPost.size());
+    blog.deleteBlogPost(1);
+    System.out.println(blog.listOfBlogPost.size());
+    blog.update(4,textOne);
+    System.out.println(blog.listOfBlogPost.size());
   }
 }
