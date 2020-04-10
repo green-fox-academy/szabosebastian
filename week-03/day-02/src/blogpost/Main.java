@@ -15,7 +15,8 @@ public class Main {
     System.out.println(blog.listOfBlogPost.size());
     blog.deleteBlogPost(1);
     System.out.println(blog.listOfBlogPost.size());
-    blog.update(4,textOne);
+    blog.update(1,textOne);
     System.out.println(blog.listOfBlogPost.size());
+    System.out.println(blog.listOfBlogPost.get(0).authorName);
   }
 }

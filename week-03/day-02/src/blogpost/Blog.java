@@ -21,8 +21,6 @@ public class Blog {
   }
 
   public void update(int index, BlogPost blogpost) {
-    for (int i = 0; i < index; i++) {
-      listOfBlogPost.add(blogpost);
-    }
+      listOfBlogPost.add(index,blogpost);
   }
 }
