@@ -1,0 +1,39 @@
+html {
+    background-color: #4396E9;
+    font-family: Arial;
+}
+
+table, td, th {
+    border: 1px solid #9EA7AF;
+    padding: 10px;
+    text-align: left;
+    font-size: 12px;
+}
+
+table {
+    -webkit-border-radius: 10%;
+    width: 300px;
+    color: #6A6F87;
+    border-collapse: collapse;
+    border-radius: 1em;
+    overflow: hidden;
+    border-style: hidden;
+}
+
+thead, th {
+    background-color: #1B1E24;
+    color: #BEC7CE;
+    font-size: 14px;
+    border-right-color: #343A45;
+    border-left-color: #343A45;
+    border-bottom: 2px solid #9EA7AF;
+    font-weight: lighter;
+}
+
+tr:nth-child(odd) {
+    background-color: lightgrey;
+}
+
+tr:nth-child(even) {
+    background-color: #FFFFFA;
+}
