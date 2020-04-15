@@ -23,7 +23,6 @@ public class RandomWordsCalc {
           .sorted((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()))
           .limit(100)
           .forEach(System.out::println);
-
     } catch (IOException ex) {
       // do something or re-throw...
     }
