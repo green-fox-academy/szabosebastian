@@ -71,19 +71,26 @@ public class StarWarsStats {
         .map(year -> year.substring(0, year.length() - 3))
         .collect(toList());
 
-    //System.out.println(birth);
-
     Double heaviest = mass.stream()
         .filter(x -> !x.matches("unknown"))
         .mapToDouble(Double::parseDouble)
         .max()
         .getAsDouble();
 
+    Stream<String> result = Stream.concat(gender.stream(), height.stream());
+    List<String> resultList = new ArrayList<>();
+
+    resultList = result.collect(toList());
+
+    System.out.println(resultList);
+
+
     Integer heavy = heaviest.intValue();
     int heaviestIndex = mass.indexOf(heavy.toString());
 
     List<String> maleAvgList = new ArrayList<>();
     List<String> femaleAvgList = new ArrayList<>();
+
     int maleBelow21 = 0;
     int maleBetween21and40 = 0;
     int maleAbove40 = 0;
