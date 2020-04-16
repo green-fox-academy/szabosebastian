@@ -1,7 +1,6 @@
 package com.greenfoxacademy.springstart.Controller;
 
 import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +14,6 @@ public class SayHello {
       "Salve", "Ciao", "Kon-nichiwa", "An-nyong Ha-se-yo", "Salvëte", "Ni hao", "Dzien' dobry", "Olá", "Bunã ziua", "Zdravstvuyte", "Hola", "Jambo", "Hujambo", "Hej",
       "Sa-wat-dee", "Merhaba", "Selam", "Vitayu", "Xin chào", "Hylo", "Sut Mae", "Sholem Aleychem", "Sawubona"};
 
-  AtomicLong atom = new AtomicLong();
   Random r = new Random();
 
 
@@ -23,10 +21,8 @@ public class SayHello {
   public String greeting(@RequestParam(name = "name") String name, @RequestParam(value = "font") int fontsize, @RequestParam(value = "color") String color, Model model) {
 
     Integer rand = r.nextInt(49);
-    Integer randomNumber = (int) atom.incrementAndGet();
-    Integer resultNumber = (randomNumber + 1) - randomNumber + rand;
 
-    model.addAttribute("hello", hellos[resultNumber]);
+    model.addAttribute("hello", hellos[rand]);
     model.addAttribute("name", name);
     model.addAttribute("style", "color: " + color + ";font-size:" + fontsize + "px");
     return "greeting";
