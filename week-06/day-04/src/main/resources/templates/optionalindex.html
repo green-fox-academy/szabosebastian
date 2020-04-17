@@ -9,17 +9,17 @@
 <h1><a href="/more-filters">More>></a></h1>
 <h1><a href="/optionalindex">INDEX>></a></h1>
 <table>
-    <tr><a href="/filter-by-type/clothesandshoes">CLOTHES AND SHOES </a><a href="/filter-by-type/electronics"> ELECTONICS </a><a
+    <tr><a href="/filter-by-type/clothesandshoes">CLOTHES AND SHOES </a><a href="/filter-by-type/electronics">
+        ELECTONICS </a><a
             href="/filter-by-type/beveragesandsnacks"> BEVERAGES AND SNACKS </a><a href="/price-in-eur"> EURO </a><a
             href="/price-in-original"> ORIGINAL CURRENCY </a></tr>
 </table>
-<table>
-    <tr><a href="/filter-by-price"> Above </a><a href="/filter-by-price"> Below </a><a
-            href="/filter-by-price"> Exactly </a></tr>
-    </table>
-<form class="searchbar" action="/search" method="post">
-    <input type="text" placeholder="Search.." name="search">
-    <button type="submit"><i class="search-button"></i></button>
+
+<form class="searchbar" action="/filter-by-price" method="post">
+    <button type="submit" class="search-button" name="searchButton" value="above">Above</button>
+    <button type="submit" class="search-button" name="searchButton" value="below">Below</button>
+    <button type="submit" class="search-button" name="searchButton" value="exactly">Exactly</button>
+    <input type="number" placeholder="Search.." name="search">
 </form>
 <table>
     <tr>
@@ -33,7 +33,7 @@
         <td th:text="${item.getName()}"></td>
         <td th:text="${item.getType()}"></td>
         <td th:text="${item.getDescription()}"></td>
-        <td th:text="${item.getPrice()}"></td>
+        <td th:text="${item.getPrice()} + ' ' + ${moneysign}"></td>
         <td th:text="${item.getQuantityStock()}"></td>
     </tr>
 </table>

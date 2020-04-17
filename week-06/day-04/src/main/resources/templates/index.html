@@ -13,7 +13,7 @@
 </table>
 <form class="searchbar" action="/search" method="post">
     <input type="text" placeholder="Search.." name="search">
-    <button type="submit"><i class="search-button"></i></button>
+    <button type="submit" class="search-button"></button>
 </form>
 <p><span th:text="${average}"></span><span th:text="${mostexpensive}"></span></p>
 <table>
@@ -28,7 +28,7 @@
         <td th:text="${item.getName()}"></td>
         <td th:text="${item.getType()}"></td>
         <td th:text="${item.getDescription()}"></td>
-        <td th:text="${item.getPrice()}"></td>
+        <td th:text="${item.getPrice()} + ' ' + ${moneysign}"></td>
         <td th:text="${item.getQuantityStock()}"></td>
     </tr>
 </table>

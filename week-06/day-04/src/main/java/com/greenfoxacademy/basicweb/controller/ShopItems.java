@@ -5,7 +5,7 @@ import java.text.DecimalFormat;
 public class ShopItems {
   private String name;
   private String description;
-  private Double price;
+  private double price;
   private int quantityStock;
   private String type;
 
@@ -13,7 +13,7 @@ public class ShopItems {
 
   }
 
-  public ShopItems(String name, String type, String description, Double price, int quantityStock) {
+  public ShopItems(String name, String type, String description, double price, int quantityStock) {
     this.name = name;
     this.type = type;
     this.description = description;
@@ -29,8 +29,14 @@ public class ShopItems {
     return description;
   }
 
-  public Double getPrice() {
+  public double getPrice() {
     return price;
+  }
+
+  public double getPriceInEuro() {
+    double euroPrice = getPrice() / 360;
+    DecimalFormat f = new DecimalFormat("#.##");
+    return Double.parseDouble(f.format(euroPrice).replace(",", "."));
   }
 
   public int getQuantityStock() {
@@ -41,10 +47,5 @@ public class ShopItems {
     return type;
   }
 
-  public double getPriceInEuro() {
-    int eur = 360;
-    double euroPrice = getPrice() / eur;
-    DecimalFormat df = new DecimalFormat("0.00");
-    return Double.parseDouble(df.format(euroPrice));
-  }
+
 }

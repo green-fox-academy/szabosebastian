@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class MyShop extends Items {
 
 
-  List<ShopItems> itemsList = addingItemsToList();
+  private List<ShopItems> itemsList = addingItemsToList();
+  private String moneysign = "HUF";
 
   @RequestMapping(value = "/index", method = RequestMethod.GET)
   public String displayAllItems(Model model) {
     model.addAttribute("items", itemsList);
+    model.addAttribute("moneysign", moneysign);
     return "index";
   }
 
@@ -27,6 +29,7 @@ public class MyShop extends Items {
         .filter(x -> x.getQuantityStock() != 0)
         .collect(Collectors.toList());
     model.addAttribute("items", availableItems);
+    model.addAttribute("moneysign", moneysign);
     return "index";
   }
 
@@ -36,6 +39,7 @@ public class MyShop extends Items {
         .sorted(Comparator.comparing(ShopItems::getPrice))
         .collect(Collectors.toList());
     model.addAttribute("items", sortedByMaxList);
+    model.addAttribute("moneysign", moneysign);
     return "index";
   }
 
@@ -45,6 +49,7 @@ public class MyShop extends Items {
         .filter(s -> s.getDescription().toLowerCase().contains("nike") || s.getName().toLowerCase().contains("nike"))
         .collect(Collectors.toList());
     model.addAttribute("items", nikeList);
+    model.addAttribute("moneysign", moneysign);
     return "index";
   }
 
@@ -61,6 +66,7 @@ public class MyShop extends Items {
     int indexOfDecimal = cuttedAvg.indexOf(".");
 
     model.addAttribute("average", cuttedAvg.substring(0, indexOfDecimal + 2));
+    model.addAttribute("moneysign", moneysign);
     return "index";
   }
 
@@ -72,6 +78,7 @@ public class MyShop extends Items {
         .get().getName();
 
     model.addAttribute("mostexpensive", mostExpensive);
+    model.addAttribute("moneysign", moneysign);
     return "index";
   }
 
@@ -81,6 +88,7 @@ public class MyShop extends Items {
         .filter(s -> s.getDescription().toLowerCase().contains(word.toLowerCase()) || s.getName().toLowerCase().contains(word.toLowerCase()))
         .collect(Collectors.toList());
     model.addAttribute("items", searchedList);
+    model.addAttribute("moneysign", moneysign);
     return "index";
   }
 
