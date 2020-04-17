@@ -5,20 +5,25 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-<p><a href="/index">My Shop </a></p>
+<h1><a href="/webshop">My Shop </a></h1>
+<h1><a href="/more-filters">More>></a></h1>
+<h1><a href="/optionalindex">INDEX>></a></h1>
 <table>
-    <tr><a href="/only-available">ONLY AVAIBLE </a><a href="/cheapest-first"> CHEAPEST FIRST </a><a
-            href="/contains-nike"> CONTAINS NIKE </a><a href="/average-stock"> AVERAGE STOCK </a><a
-            href="/most-expensive"> MOST EXPENSIVE AVAIBLE </a></tr>
+    <tr><a href="/filter-by-type/clothesandshoes">CLOTHES AND SHOES </a><a href="/filter-by-type/electronics"> ELECTONICS </a><a
+            href="/filter-by-type/beveragesandsnacks"> BEVERAGES AND SNACKS </a><a href="/price-in-eur"> EURO </a><a
+            href="/price-in-original"> ORIGINAL CURRENCY </a></tr>
 </table>
+<table>
+    <tr><a href="/filter-by-price"> Above </a><a href="/filter-by-price"> Below </a><a
+            href="/filter-by-price"> Exactly </a></tr>
+    </table>
 <form class="searchbar" action="/search" method="post">
     <input type="text" placeholder="Search.." name="search">
     <button type="submit"><i class="search-button"></i></button>
 </form>
-<p><span th:text="${average}"></span><span th:text="${mostexpensive}"></span></p>
 <table>
     <tr>
-        <th>Name</th>
+        <td>Name</td>
         <td>Type</td>
         <td>Description</td>
         <td>Price</td>

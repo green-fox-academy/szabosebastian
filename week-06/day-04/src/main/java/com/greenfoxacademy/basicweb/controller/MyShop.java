@@ -1,32 +1,17 @@
 package com.greenfoxacademy.basicweb.controller;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class MyShop {
+public class MyShop extends Items {
 
-  ShopItems items = new ShopItems();
-  List<ShopItems> emptyListOfItems = new ArrayList<>();
-
-  public List<ShopItems> addingItemsToList() {
-    emptyListOfItems.add(new ShopItems("Running shoes", "Best nike shoes", 1000.0, 5));
-    emptyListOfItems.add(new ShopItems("Printer", "Some HP", 3000.0, 2));
-    emptyListOfItems.add(new ShopItems("Coca cola", "0.5l", 23.0, 0));
-    emptyListOfItems.add(new ShopItems("Wokin", "ChickNIKEen Nike with rice", 119.0, 4));
-    emptyListOfItems.add(new ShopItems("NIke", "ChickNIKEen Nike with rice", 119.0, 3));
-    emptyListOfItems.add(new ShopItems("MOST EXPENSIVE THING", "ChickNIKEen Nike with rice", 11119.0, 300));
-
-    return emptyListOfItems;
-  }
 
   List<ShopItems> itemsList = addingItemsToList();
 
