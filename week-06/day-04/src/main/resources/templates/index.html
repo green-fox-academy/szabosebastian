@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<table><tr><a href="/only-available">ONLY AVAIBLE </a><a href="/cheapest-first"> CHEAPEST FIRST </a><a href="/contains-nike"> CONTAINS NIKE </a><a> AVERAGE STOCK </a><a> MOST EXPENSIVE AVAIBLE </a></tr></table>
+
+<table>
+    <tr th:each="item : ${items}">
+        <td th:text="${item.getName()}"></td>
+        <td th:text="${item.getDescription()}"></td>
+        <td th:text="${item.getPrice()}"></td>
+        <td th:text="${item.getQuantityStock()}"></td>
+    </tr>
+</table>
+</body>
+</html>
