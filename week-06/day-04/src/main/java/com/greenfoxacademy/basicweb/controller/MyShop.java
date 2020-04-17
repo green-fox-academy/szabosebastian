@@ -6,8 +6,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class MyShop {
@@ -19,8 +21,9 @@ public class MyShop {
     emptyListOfItems.add(new ShopItems("Running shoes", "Best nike shoes", 1000.0, 5));
     emptyListOfItems.add(new ShopItems("Printer", "Some HP", 3000.0, 2));
     emptyListOfItems.add(new ShopItems("Coca cola", "0.5l", 23.0, 0));
-    emptyListOfItems.add(new ShopItems("Wokin", "ChickNIKEen Nike with rice", 119.0, 3));
+    emptyListOfItems.add(new ShopItems("Wokin", "ChickNIKEen Nike with rice", 119.0, 4));
     emptyListOfItems.add(new ShopItems("NIke", "ChickNIKEen Nike with rice", 119.0, 3));
+    emptyListOfItems.add(new ShopItems("MOST EXPENSIVE THING", "ChickNIKEen Nike with rice", 11119.0, 300));
 
     return emptyListOfItems;
   }
@@ -60,5 +63,40 @@ public class MyShop {
     return "index";
   }
 
+  @RequestMapping(value = "/average-stock", method = RequestMethod.GET)
+  public String displayAvgOfStock(Model model) {
+    Double averageOfStock = itemsList.stream()
+        .filter(x -> x.getQuantityStock() != 0)
+        .map(stock -> stock.getQuantityStock())
+        .mapToDouble(Double::valueOf)
+        .average()
+        .getAsDouble();
+
+    String cuttedAvg = String.valueOf(averageOfStock);
+    int indexOfDecimal = cuttedAvg.indexOf(".");
+
+    model.addAttribute("average", cuttedAvg.substring(0, indexOfDecimal + 2));
+    return "index";
+  }
+
+  @RequestMapping(value = "/most-expensive", method = RequestMethod.GET)
+  public String displayMostExpensive(Model model) {
+    String mostExpensive = itemsList.stream()
+        .sorted(Comparator.comparing(ShopItems::getPrice).reversed())
+        .findFirst()
+        .get().getName();
+
+    model.addAttribute("mostexpensive", mostExpensive);
+    return "index";
+  }
+
+  @RequestMapping(value = "/search", method = RequestMethod.POST)
+  public String searchAction(@RequestParam("search") String word, Model model) {
+    List<ShopItems> searchedList = itemsList.stream()
+        .filter(s -> s.getDescription().toLowerCase().contains(word.toLowerCase()) || s.getName().toLowerCase().contains(word.toLowerCase()))
+        .collect(Collectors.toList());
+    model.addAttribute("items", searchedList);
+    return "index";
+  }
 
 }

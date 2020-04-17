@@ -5,8 +5,17 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-<table><tr><a href="/only-available">ONLY AVAIBLE </a><a href="/cheapest-first"> CHEAPEST FIRST </a><a href="/contains-nike"> CONTAINS NIKE </a><a> AVERAGE STOCK </a><a> MOST EXPENSIVE AVAIBLE </a></tr></table>
-
+<p><a href="/index">My Shop </a></p>
+<table>
+    <tr><a href="/only-available">ONLY AVAIBLE </a><a href="/cheapest-first"> CHEAPEST FIRST </a><a
+            href="/contains-nike"> CONTAINS NIKE </a><a href="/average-stock"> AVERAGE STOCK </a><a
+            href="/most-expensive"> MOST EXPENSIVE AVAIBLE </a></tr>
+</table>
+<form class="searchbar" action="/search" method="post">
+    <input type="text" placeholder="Search.." name="search">
+    <button type="submit"><i class="search-button"></i></button>
+</form>
+<p><span th:text="${average}"></span><span th:text="${mostexpensive}"></span></p>
 <table>
     <tr th:each="item : ${items}">
         <td th:text="${item.getName()}"></td>
