@@ -16,7 +16,7 @@
     <button type="submit" class="search-button"></button>
 </form>
 <p><span th:text="${average}"></span><span th:text="${mostexpensive}"></span></p>
-<table>
+<table th:if="${items}">
     <tr>
         <th>Name</th>
         <td>Type</td>
