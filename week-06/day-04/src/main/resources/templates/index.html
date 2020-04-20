@@ -15,6 +15,7 @@
         class="menulinks" href="/contains-nike"> CONTAINS NIKE </a><a class="menulinks" href="/average-stock"> AVERAGE STOCK </a><a
         class="menulinks" href="/most-expensive"> MOST EXPENSIVE AVAIBLE </a>
 </div>
+<p>Search for:</p>
 <form class="searchbar" action="/search" method="post">
     <input type="text" placeholder="...something like that" name="search">
     <button type="submit" class="search-button">Search</button>
@@ -31,9 +32,9 @@
     <tr th:each="item : ${items}">
         <td th:text="${item.getName()}"></td>
         <td th:text="${item.getType()}"></td>
-        <td th:text="${item.getDescription()}"></td>
-        <td th:text="${item.getPrice()} + ' ' + ${moneysign}"></td>
-        <td th:text="${item.getQuantityStock()}"></td>
+        <td class="description" th:text="${item.getDescription()}"></td>
+        <td class="numbers" th:text="${item.getPrice()} + ' ' + ${moneysign}"></td>
+        <td class="numbers" th:text="${item.getQuantityStock()}"></td>
     </tr>
 </table>
 </body>
