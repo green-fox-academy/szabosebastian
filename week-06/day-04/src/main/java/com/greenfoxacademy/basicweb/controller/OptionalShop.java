@@ -68,7 +68,7 @@ public class OptionalShop extends Items {
   }
 
   @RequestMapping(value = "/filter-by-price", method = RequestMethod.POST)
-  public String displayFilterByPriceAbove(@RequestParam("searchButton") String buttonValue, @RequestParam(value = "search") Double searchValue, Model model) {
+  public String displayFilterByPrice(@RequestParam("searchButton") String buttonValue, @RequestParam(value = "search") Double searchValue, Model model) {
     if (searchValue == null) {
       return "optionalindex";
     }

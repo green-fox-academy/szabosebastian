@@ -3,26 +3,30 @@
 <head>
     <title>Getting Started: Serving Web Content</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-<p><a href="/index">My Shop </a></p>
-<table>
-    <tr><a href="/only-available">ONLY AVAIBLE </a><a href="/cheapest-first"> CHEAPEST FIRST </a><a
-            href="/contains-nike"> CONTAINS NIKE </a><a href="/average-stock"> AVERAGE STOCK </a><a
-            href="/most-expensive"> MOST EXPENSIVE AVAIBLE </a></tr>
-</table>
+<header>
+    <h1><a class="headh1" href="/index">My Shop </a></h1>
+</header>
+<hr>
+<div class="menurow">
+    <a class="menulinks" href="/only-available">ONLY AVAIBLE </a><a class="menulinks" href="/cheapest-first"> CHEAPEST FIRST </a><a
+        class="menulinks" href="/contains-nike"> CONTAINS NIKE </a><a class="menulinks" href="/average-stock"> AVERAGE STOCK </a><a
+        class="menulinks" href="/most-expensive"> MOST EXPENSIVE AVAIBLE </a>
+</div>
 <form class="searchbar" action="/search" method="post">
-    <input type="text" placeholder="Search.." name="search">
-    <button type="submit" class="search-button"></button>
+    <input type="text" placeholder="...something like that" name="search">
+    <button type="submit" class="search-button">Search</button>
 </form>
 <p><span th:text="${average}"></span><span th:text="${mostexpensive}"></span></p>
 <table th:if="${items}">
     <tr>
         <th>Name</th>
-        <td>Type</td>
-        <td>Description</td>
-        <td>Price</td>
-        <td>Quantitiy of stock</td>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Quantitiy of stock</th>
     </tr>
     <tr th:each="item : ${items}">
         <td th:text="${item.getName()}"></td>

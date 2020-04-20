@@ -1,0 +1,70 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+header, .headh1, h1 {
+    text-decoration: none;
+    color: #1FBCD2;
+    padding: 0px;
+    margin: 0px;
+}
+
+hr {
+    background-color: #1FBCD2;
+    padding: 0px;
+    margin: 0px;
+}
+
+.menurow {
+    margin: 20px 0px 20px 0px;
+}
+
+.menulinks {
+    text-decoration: none;
+    margin: 0px 20px 0px 0px;
+    background-color: red;
+    color: white;
+    padding: 1px 5px;
+    text-transform: uppercase;
+    border-radius: 5px;
+}
+
+form {
+    align-content: space-between;
+}
+
+.search-button {
+    background-color: red;
+    border: none;
+    color: white;
+    padding: 0px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    height: 40px;
+}
+
+input {
+    border: 1px solid red;
+    border-radius: 5px;
+    width: 300px;
+    height: 40px;
+}
+
+table {
+    color: black;
+    text-align: center;
+}
+
+th {
+    background-color: #1FBCD2;
+    font-weight: lighter;
+}
+
+th, td {
+    padding: 5px 5px;
+}
+
+

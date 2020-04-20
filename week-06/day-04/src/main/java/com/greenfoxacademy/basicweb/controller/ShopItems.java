@@ -34,7 +34,8 @@ public class ShopItems {
   }
 
   public double getPriceInEuro() {
-    double euroPrice = getPrice() / 360;
+    int eur = 350;
+    double euroPrice = getPrice() / eur;
     DecimalFormat f = new DecimalFormat("#.##");
     return Double.parseDouble(f.format(euroPrice).replace(",", "."));
   }
@@ -46,6 +47,5 @@ public class ShopItems {
   public String getType() {
     return type;
   }
-
 
 }
