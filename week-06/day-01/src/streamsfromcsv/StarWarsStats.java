@@ -77,6 +77,7 @@ public class StarWarsStats {
         .max()
         .getAsDouble();
 
+
     Stream<String> result = Stream.concat(gender.stream(), height.stream());
     List<String> resultList = new ArrayList<>();
 
@@ -162,7 +163,5 @@ public class StarWarsStats {
     System.out.println("male: " + maleBelow21 + " " + maleBetween21and40 + " " + maleAbove40 + " " + maleUnknown);
     System.out.println("female: " + femaleBelow21 + " " + femaleBetween21and40 + " " + femaleAbove40 + " " + femaleUnknown);
     System.out.println("other: " + otherBelow21 + " " + otherBetween21and40 + " " + otherAbove40 + " " + otherUnknown);
-
-
   }
 }

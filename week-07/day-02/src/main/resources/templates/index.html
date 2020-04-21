@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="eng">
+<head>
+    <title>#SIMBA#</title>
+    <link rel="stylesheet" th:href="@{/style.css}"/>
+    <meta charset="utf-8"/>
+</head>
+<body>
+<table>
+    <tr>
+        <td th:text="${name}"></td>
+        <td th:text="${#numbers.formatDecimal(balance,3,2,'POINT')} + ' Zebra'"></td>
+        <td th:text="${type}"></td>
+    </tr>
+</table>
+<table>
+    <tr th:each="bank : ${data}" th:object="${bank}"}>
+        <td th:text="${bankStat.index + 1}"></td>
+        <td th:text="*{name}"></td>
+        <td th:text="*{balance}"></td>
+        <td th:text="*{animalType}"></td>
+        <td th:text="*{isKing()} ? 'King'  : ''" th:style="'color:red'"></td>
+        <td th:switch="*{isBehavior()}"><span th:case="true">Good One</span><span th:case="false"> Bad Guy</span></td>
+        <td th:text="*{isBehavior()} ? 'Good One' : 'Bad Guy'"></td>
+    </tr>
+</table>
+<div th:text="${myString}"></div>
+<div th:utext="${myString}"></div>
+<form>
+    <button type="submit" name="button" value="submit">Submit</button>
+</form>
+</body>
+</html>

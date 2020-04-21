@@ -13,6 +13,7 @@ public class Items {
     emptyListOfItems.add(new ShopItems("Coca cola", "Beverages and Snacks", "0.5l standart coke", 25.0, 0));
     emptyListOfItems.add(new ShopItems("Wokin", "Beverages and Snacks", "Chicken with fired rice and WOKIN sauce", 119.0, 100));
     emptyListOfItems.add(new ShopItems("T-shirt", "Clothes and Shoes", "Blue with a corgi on a bike", 300.0, 1));
+    emptyListOfItems.add(new ShopItems("Foci labda", "Sport equipment", "Labda játék", 5000.0, 7));
 
     return emptyListOfItems;
   }
