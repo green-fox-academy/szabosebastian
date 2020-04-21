@@ -1,12 +1,14 @@
 package com.greenfoxacademy.bankofsimba.controllers;
 
 import com.greenfoxacademy.bankofsimba.models.BankAccount;
+import java.security.cert.CollectionCertStoreParameters;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -40,19 +42,31 @@ public class MainController {
   @GetMapping("/list")
   public String showList(Model model) {
     model.addAttribute("data", bankAccountList);
+    model.addAttribute("emptyAnimal", new BankAccount());
     return "index";
   }
 
-  //@RequestMapping(value = "/list", method = RequestMethod.POST)
-  @PostMapping("/list")
-  public String addBalance(@RequestParam("button") String buttonAction, Model model) {
-
-    if (buttonAction.equals("submit")) {
-      List<BankAccount> balancedList = bankAccountList.stream()
-          .map(x -> new BankAccount(x.getName(), x.getBalance() + 10, x.getAnimalType(), x.isKing(), x.isBehavior()))
-          .collect(Collectors.toList());
-      model.addAttribute("data", balancedList);
+  @PostMapping("/add")
+  public String addBalance(@RequestParam("button") String buttonAction, @RequestParam("select") String acc, Model model) {
+    if (!buttonAction.equals("submit")) {
+      return "index";
     }
-    return "index";
+
+    model.addAttribute("data", bankAccountList.stream()
+        .filter(x -> x.getName().equals(acc)).findFirst()
+        .map(x -> {
+              int increment = x.isKing() ? 100 : 20;
+              x.setBalance(x.getBalance() + increment);
+              return x;
+            }
+        ));
+    return "redirect:/list";
+  }
+
+  @PostMapping("/create")
+  public String addUser(@ModelAttribute BankAccount user) {
+    System.out.println(user.isKing());
+    bankAccountList.add(user);
+    return "redirect:/list";
   }
 }

@@ -6,15 +6,15 @@
     <meta charset="utf-8"/>
 </head>
 <body>
-<table>
+<table th:if="${name}">
     <tr>
         <td th:text="${name}"></td>
-        <td th:text="${#numbers.formatDecimal(balance,3,2,'POINT')} + ' Zebra'"></td>
+        <td th:text="${#numbers.formatDecimal(balance,3,2,'POINT')} + 'Zebra'"></td>
         <td th:text="${type}"></td>
     </tr>
 </table>
 <table>
-    <tr th:each="bank : ${data}" th:object="${bank}"}>
+    <tr th:each="bank : ${data}" th:object="${bank}" }>
         <td th:text="${bankStat.index + 1}"></td>
         <td th:text="*{name}"></td>
         <td th:text="*{balance}"></td>
@@ -26,8 +26,30 @@
 </table>
 <div th:text="${myString}"></div>
 <div th:utext="${myString}"></div>
-<form>
+<form action="/add" method="post">
+    <select name="select">
+        <option th:each="bank : ${data}" th:text="${bank.getName()}"></option>
+    </select>
     <button type="submit" name="button" value="submit">Submit</button>
+</form>
+<form action="/create" method="post" th:object="${emptyAnimal}">
+    <label>Name:</label>
+    <input type="text" th:field="*{name}"><br>
+    <label>Balance:</label>
+    <input type="number" th:field="*{balance}"><br>
+    <label>Type:</label>
+    <input type="text" th:field="*{animalType}"><br>
+    <label>Is King:</label>
+    <select th:field="*{king}">
+        <option value=true>True</option>
+        <option value=false>False</option>
+    </select><br>
+    <label>Behavior:</label>
+    <select th:field="*{behavior}">
+        <option value=true>True</option>
+        <option value=false>False</option>
+    </select><br>
+    <button type="submit">Add user</button>
 </form>
 </body>
 </html>
