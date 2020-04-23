@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>DAY-04</title>
+    <meta charset="utf-8"/>
+</head>
+<body th:style="'background-color:' + ${style} + ';'">
+<a href="/useful">index</a>
+<a href="/useful/colored">colored</a>
+<a href="/useful/email?email=is@this.valid">go to email</a>
+<a href="/useful/encode?text=mizumizu&number=1">encode</a>
+<a href="/useful/decode?text=mizumizu&number=1">decode</a>
+<p th:if="${email}" th:text="${email} +' ' + ${valid}" th:style="'color:' + ${emailbackground}"></p>
+<p th:text="${encodedtext}"></p>
+<p th:text="${decodetext}"></p>
+</body>
+</html>
