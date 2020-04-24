@@ -45,7 +45,7 @@ public class MainController {
   @GetMapping("useful/decode")
   public String decodeText(@RequestParam(defaultValue = "", value = "text") String text, @RequestParam(defaultValue = "", value = "number") int number, Model model) {
 
-    model.addAttribute("decodetext", utility.caesar(text, number * -1));
+    model.addAttribute("decodetext", number < 0 ? "query param is negative number" : utility.caesar(text, number * -1));
     System.out.println(number);
     return "useful";
   }
