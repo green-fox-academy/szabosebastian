@@ -11,11 +11,19 @@
     <li><a href="/login">Login</a></li>
 </ul>
 <img src="/greenfox.png">
-<p th:each="list : ${foxlist}" th:text="${list.getName()}"></p>
+<!-- <p th:each="list : ${foxlist}" th:text="${list.getName()} +' '+ ${list.getDrink()} + ' ' + ${list.getFood()}"></p> -->
+<div>
+    <span th:if="${fox.get().getTricks().size() == 0}"
+          th:text="'This is ' + ${fox.get().getName()} + '. Currently living on ' + ${fox.get().getFood()} + ' and ' + ${fox.get().getDrink()} + '. He knows zero tricks'"></span>
+    <span th:unless="${fox.get().getTricks().size() == 0}"
+          th:text="'This is ' + ${fox.get().getName()} + '. Currently living on ' + ${fox.get().getFood()} + ' and ' + ${fox.get().getDrink()} + '. He knows ' + ${fox.get().getTricks().size()} + ' tricks'"></span>
+</div>
+<p th:text="${foxlist}"></p>
 <h1>Known tricks</h1>
-<ul>
-    <li>write HTML</li>
-    <li>code in Java</li>
-</ul>
+<table>
+    <tr th:each="trick : ${fox.get().getTricks()}">
+    <td th:text="${trick}"></td>
+    </tr>
+</table>
 </body>
 </html>

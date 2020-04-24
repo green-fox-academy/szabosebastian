@@ -13,6 +13,11 @@ public class Fox {
   private String drink;
 
   public Fox() {
+
+  }
+
+  public Fox(String name) {
+    this.name = name;
     this.food = "pizza";
     this.drink = "water";
   }
