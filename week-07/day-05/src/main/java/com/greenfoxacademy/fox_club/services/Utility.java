@@ -1,26 +1,26 @@
 package com.greenfoxacademy.fox_club.services;
 
+import com.greenfoxacademy.fox_club.models.Fox;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
 @Service
-public class Utility {
+public class Utility extends Fox {
   private List<Fox> foxes;
-  List<String> tricks = Arrays.asList("ugras","futas","uszas");
+  public Fox currentFox;
 
   public Utility() {
-    foxes = new ArrayList<>();
-    foxes.add(new Fox(tricks, "asd", "asd", "asd"));
+    this.foxes = new ArrayList<>();
+  }
+
+  public void addFox(Fox fox) {
+    this.foxes.add(fox);
+    this.currentFox = fox;
   }
 
   public List<Fox> getFoxes() {
-    return foxes;
-  }
-
-  public void setFoxes(List<Fox> foxes) {
-    this.foxes = foxes;
+    return this.foxes;
   }
 
   public boolean searchInTheList(String name) {
@@ -30,5 +30,21 @@ public class Utility {
       }
     }
     return false;
+  }
+
+  public void setCurrentFox(String name) {
+    for (Fox searchFox : foxes) {
+      if (searchFox.getName().equals(name)) {
+        this.currentFox = searchFox;
+      }
+    }
+  }
+
+  public void addTrick(String trick) {
+    for (String s : currentFox.getCurrentTricks()) {
+      if (!s.equals(trick)) {
+        this.currentFox.getCurrentTricks().add(trick);
+      }
+    }
   }
 }

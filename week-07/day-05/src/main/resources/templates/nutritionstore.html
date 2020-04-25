@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Fox Club</title>
+    <link rel="stylesheet" th:href="@{/style.css}"/>
+    <meta charset="utf-8"/>
+</head>
+<body>
+<ul>
+    <li><a href="/">Index</a></li>
+    <li><a href="/nutritionstore">Nutrition Strore</a></li>
+    <li><a href="/tricks">Tricks</a></li>
+    <li><a href="/login">Login</a></li>
+</ul>
+<form action="/nutritionstore" method="post">
+    <label>Food</label>
+    <select name="foodselect">
+        <option th:each=" foods : ${foodlist}" th:text="${foods}"></option>
+    </select>
+    <label>Drink</label>
+    <select name="drinkselect">
+        <option th:each=" drinks : ${drinklist}" th:text="${drinks}"></option>
+    </select>
+    <button type="submit">Change</button>
+</form>
+</body>
+</html>
