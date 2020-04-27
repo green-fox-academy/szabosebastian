@@ -17,9 +17,10 @@
     </tr>
     <tr th:each="todo : ${todos}">
         <td th:text="${todo.getId()}"></td>
-        <td th:text="${todo.getTitle()}"></td>
+        <td><a th:href="'todo/'+${todo.getId()}+'/'+${todo.getTitle()}" th:text="${todo.getTitle()}"></a></td>
         <td th:text="${todo.isUrgent()}"></td>
         <td th:text="${todo.isDone()}"></td>
+        <td th:text="${todo.getCreatedDate()}"></td>
         <td><a th:href="'todo/'+${todo.getId()}+'/delete'">delete</a></td>
         <td><a th:href="'todo/'+${todo.getId()}+'/edit'">edit</a></td>
     </tr>

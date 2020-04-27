@@ -1,9 +1,13 @@
 package com.greenfoxacademy.connect_with_mysql.models;
 
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 public class Todo {
@@ -16,6 +20,10 @@ public class Todo {
   private boolean urgent;
   private boolean done;
 
+  @CreationTimestamp
+  @Temporal(TemporalType.TIME)
+  private Date createdDate;
+
   public Todo() {
   }
 
@@ -27,6 +35,14 @@ public class Todo {
     this.title = title;
     this.urgent = urgent;
     this.done = done;
+  }
+
+  public Date getCreatedDate() {
+    return createdDate;
+  }
+
+  public void setCreatedDate(Date createdDate) {
+    this.createdDate = createdDate;
   }
 
   public long getId() {
