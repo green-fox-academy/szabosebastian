@@ -2,18 +2,27 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Thymeleaf Exercise #</title>
-    <link rel="stylesheet" th:href="@{/style.css}" />
-    <meta charset="utf-8" />
+    <link rel="stylesheet" th:href="@{/style.css}"/>
+    <meta charset="utf-8"/>
 </head>
 <body>
-    <h1>Todos for today:</h1>
-    <table>
-        <tr th:each="todo : ${todos}">
+<h1>Todos for today:</h1>
+<a href="/todo/add">Add new todo</a>
+<table>
+    <tr>
+        <td>ID</td>
+        <td>ACTION</td>
+        <td>URGENT</td>
+        <td>DONE</td>
+    </tr>
+    <tr th:each="todo : ${todos}">
         <td th:text="${todo.getId()}"></td>
         <td th:text="${todo.getTitle()}"></td>
         <td th:text="${todo.isUrgent()}"></td>
         <td th:text="${todo.isDone()}"></td>
-        </tr>
-    </table>
+        <td><a th:href="'todo/'+${todo.getId()}+'/delete'">delete</a></td>
+        <td><a th:href="'todo/'+${todo.getId()}+'/edit'">edit</a></td>
+    </tr>
+</table>
 </body>
 </html>

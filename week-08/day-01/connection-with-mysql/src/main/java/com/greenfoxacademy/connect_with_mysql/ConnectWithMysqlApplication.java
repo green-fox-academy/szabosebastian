@@ -23,7 +23,7 @@ public class ConnectWithMysqlApplication implements CommandLineRunner {
   public void run(String... args) throws Exception {
     this.todoRepository.save(new Todo("I have to solve a task"));
     this.todoRepository.save(new Todo("Second task"));
-    this.todoRepository.save(new Todo("Third task",true,false));
-    this.todoRepository.save(new Todo("Fourth task",true,true));
+    this.todoRepository.save(new Todo("Third task", true, false));
+    this.todoRepository.save(new Todo("Fourth task", true, true));
   }
 }

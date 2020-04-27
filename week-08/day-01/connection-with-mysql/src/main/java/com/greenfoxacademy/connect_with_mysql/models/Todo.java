@@ -13,7 +13,7 @@ public class Todo {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
   private String title;
-  private  boolean urgent;
+  private boolean urgent;
   private boolean done;
 
   public Todo() {
