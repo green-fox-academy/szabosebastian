@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class Utility extends Fox {
   private List<Fox> foxes;
-  public Fox currentFox;
+  private Fox currentFox;
 
   public Utility() {
     this.foxes = new ArrayList<>();
@@ -17,6 +17,14 @@ public class Utility extends Fox {
   public void addFox(Fox fox) {
     this.foxes.add(fox);
     this.currentFox = fox;
+  }
+
+  public Fox getCurrentFox() {
+    return currentFox;
+  }
+
+  public void setCurrentFox(Fox currentFox) {
+    this.currentFox = currentFox;
   }
 
   public List<Fox> getFoxes() {

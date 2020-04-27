@@ -29,20 +29,22 @@ public class MainController {
     return "login";
   }
 
+  String query_name;
 
   @PostMapping("/login")
   public String postLogin(@RequestParam(defaultValue = "", value = "name") String name, @ModelAttribute Fox fox) {
+    this.query_name = name;
     if (!this.utility.searchInTheList(name)) {
       this.utility.addFox(new Fox(name));
     } else {
       this.utility.setCurrentFox(name);
     }
-    return "redirect:/fox?name=" + name;
+    return "redirect:/fox?name=" + query_name;
   }
 
   @GetMapping("/fox")
   public String showFox(Model model) {
-    model.addAttribute("fox", this.utility.currentFox);
+    model.addAttribute("fox", this.utility.getCurrentFox());
     model.addAttribute("foxlist", this.utility.getFoxes().size());
     return "fox";
   }
@@ -58,9 +60,9 @@ public class MainController {
   public String postNutrition(@RequestParam("foodselect") String foodselect,
                               @RequestParam("drinkselect") String drinkselect,
                               Model model) {
-    this.utility.currentFox.setDrink(drinkselect);
-    this.utility.currentFox.setFood(foodselect);
-    return "redirect:/fox?name=";
+    this.utility.getCurrentFox().setDrink(drinkselect);
+    this.utility.getCurrentFox().setFood(foodselect);
+    return "redirect:/fox?name=" + query_name;
   }
 
   @GetMapping("/tricks")
@@ -71,14 +73,14 @@ public class MainController {
 
   @PostMapping("/tricks")
   public String postTricks(@RequestParam("trickselect") String trick) {
-    System.out.println(this.utility.currentFox.getCurrentTricks());
-    if (this.utility.currentFox.getCurrentTricks().isEmpty()) {
-      this.utility.currentFox.getCurrentTricks().add(trick);
+    System.out.println(this.utility.getCurrentFox().getCurrentTricks());
+    if (this.utility.getCurrentFox().getCurrentTricks().isEmpty()) {
+      this.utility.getCurrentFox().getCurrentTricks().add(trick);
     }
 
-    if (!this.utility.currentFox.getCurrentTricks().contains(trick)) {
-      this.utility.currentFox.getCurrentTricks().add(trick);
+    if (!this.utility.getCurrentFox().getCurrentTricks().contains(trick)) {
+      this.utility.getCurrentFox().getCurrentTricks().add(trick);
     }
-    return "redirect:/fox?name=";
+    return "redirect:/fox?name=" + query_name;
   }
 }
