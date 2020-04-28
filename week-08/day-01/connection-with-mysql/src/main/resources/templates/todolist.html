@@ -24,6 +24,10 @@
         <td>DESCRIPTION</td>
         <td>URGENT</td>
         <td>DONE</td>
+        <td>CREATED TIME</td>
+        <td>ASSIGNEE</td>
+        <td>DELETE</td>
+        <td>EDIT</td>
     </tr>
     <tr th:each="todo : ${todos}">
         <td th:text="${todo.getId()}"></td>
@@ -33,6 +37,8 @@
         <td th:text="${todo.isUrgent()}"></td>
         <td th:text="${todo.isDone()}"></td>
         <td th:text="${todo.getCreatedDate()}"></td>
+        <td th:if="${todo.getAssignee() != null}" ><a th:text="${todo.getAssignee().getName()}" th:href="'assignee/' + ${todo.getAssignee().getId()}+ '/' + ${todo.getAssignee().getName()}"></a></td>
+        <td th:if="${todo.getAssignee() == null}" th:text="|No Assignee selected|"></td>
         <td><a th:href="'todo/'+${todo.getId()}+'/delete'">delete</a></td>
         <td><a th:href="'todo/'+${todo.getId()}+'/edit'">edit</a></td>
     </tr>

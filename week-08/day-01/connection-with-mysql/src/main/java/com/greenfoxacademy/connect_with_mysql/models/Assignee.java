@@ -22,7 +22,6 @@ public class Assignee {
   @OneToMany(fetch = FetchType.EAGER, mappedBy = "assignee", cascade = CascadeType.ALL)
   private List<Todo> todos = new ArrayList<>();
 
-
   public Assignee() {
 
   }

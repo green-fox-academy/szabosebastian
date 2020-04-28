@@ -8,6 +8,10 @@
 <body>
 <h1>Edit Todo</h1>
 <form th:object="${todo}" th:action="@{'/todo/'+${todo.getId()}+'/edit'}" method="post">
+    <select name="selectid">
+        <option th:value="null" th:text="Select"></option>
+        <option th:each="asg : ${assignee}" th:text="${asg.getName()}" th:value="${asg.getId()}"></option>
+    </select><br>
     <label>Todo Desciption</label>
     <input type="text" th:field="*{title}" th:value="*{title}"><br>
     <label>Urgent</label>
@@ -18,8 +22,6 @@
     <a href="/todo">Cancel</a>
 </form>
 <p>Assignees</p>
-<select>
-    <option th:each="asg : ${assignee}" th:text="${asg.getName()}"></option>
-</select>
+</form>
 </body>
 </html>

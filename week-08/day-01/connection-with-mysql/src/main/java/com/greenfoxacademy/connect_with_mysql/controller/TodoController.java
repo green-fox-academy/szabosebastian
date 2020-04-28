@@ -60,8 +60,9 @@ public class TodoController {
   }
 
   @PostMapping("todo/{id}/edit")
-  public String editTodo(@ModelAttribute Todo todo) {
+  public String editTodo(@ModelAttribute Todo todo, @RequestParam(name = "selectid") long selectid) {
     this.todoService.addTodo(todo);
+    this.todoService.addTodoToAssignee(this.todoService.editAssignee(selectid),todo);
     return "redirect:/todo";
   }
 
@@ -118,4 +119,11 @@ public class TodoController {
     this.todoService.addTodoToAssignee(this.todoService.editAssignee(assigneeId), this.todoService.editTodo(todoId));
     return "redirect:/todo";
   }
+
+  @GetMapping("assignee/{id}/{title}")
+  public String showAssigneInformation(@PathVariable("id") long id, Model model){
+    model.addAttribute("assignee",this.todoService.editAssignee(id));
+    return "assignee_info";
+  }
+
 }
