@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thymeleaf Exercise #</title>
+    <link rel="stylesheet" th:href="@{/style.css}"/>
+    <meta charset="utf-8"/>
+</head>
+<body>
+<h1>Edit Assignee</h1>
+<form th:object="${asg}" th:action="@{'/assignee/'+${asg.getId()}+'/edit'}" method="post">
+    <label>Edit name</label>
+    <input type="text" th:field="*{name}" th:value="*{name}"><br>
+    <label>Edit email</label>
+    <input type="text" th:field="*{email}" th:value="*{email}"><br>
+    <button type="submit">Submit</button>
+    <a href="/assignee">Cancel</a>
+</form>
+</body>
+</html>

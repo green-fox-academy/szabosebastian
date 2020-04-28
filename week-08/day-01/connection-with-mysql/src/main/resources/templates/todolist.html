@@ -7,17 +7,29 @@
 </head>
 <body>
 <h1>Todos for today:</h1>
-<a href="/todo/add">Add new todo</a>
+<a href="/todo/add">Add new todo</a> <a href="/assignee">List of Assignees</a>
+<form action="/search" method="post">
+    <select name="select">
+        <option value="title">title</option>
+        <option value="content">content</option>
+        <option value="description">description</option>
+    </select>
+    <input type="text" placeholder="Search.." name="search">
+</form>
 <table>
     <tr>
         <td>ID</td>
         <td>ACTION</td>
+        <td>CONTENT</td>
+        <td>DESCRIPTION</td>
         <td>URGENT</td>
         <td>DONE</td>
     </tr>
     <tr th:each="todo : ${todos}">
         <td th:text="${todo.getId()}"></td>
         <td><a th:href="'todo/'+${todo.getId()}+'/'+${todo.getTitle()}" th:text="${todo.getTitle()}"></a></td>
+        <td th:text="${todo.getContent()}"></td>
+        <td th:text="${todo.getDescription()}"></td>
         <td th:text="${todo.isUrgent()}"></td>
         <td th:text="${todo.isDone()}"></td>
         <td th:text="${todo.getCreatedDate()}"></td>

@@ -2,9 +2,11 @@ package com.greenfoxacademy.connect_with_mysql.models;
 
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.hibernate.annotations.CreationTimestamp;
@@ -12,17 +14,21 @@ import org.hibernate.annotations.CreationTimestamp;
 @Entity
 public class Todo {
 
-
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
   private String title;
+  private String content;
+  private String description;
   private boolean urgent;
   private boolean done;
 
   @CreationTimestamp
   @Temporal(TemporalType.TIME)
   private Date createdDate;
+
+  @ManyToOne(fetch = FetchType.EAGER)
+  private Assignee assignee;
 
   public Todo() {
   }
@@ -35,6 +41,38 @@ public class Todo {
     this.title = title;
     this.urgent = urgent;
     this.done = done;
+  }
+
+  public Todo(String title, String content, String description, boolean urgent, boolean done) {
+    this.title = title;
+    this.content = content;
+    this.description = description;
+    this.urgent = urgent;
+    this.done = done;
+  }
+
+  public Assignee getAssignee() {
+    return assignee;
+  }
+
+  public void setAssignee(Assignee assignee) {
+    this.assignee = assignee;
+  }
+
+  public String getContent() {
+    return content;
+  }
+
+  public void setContent(String content) {
+    this.content = content;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
   }
 
   public Date getCreatedDate() {

@@ -1,6 +1,8 @@
 package com.greenfoxacademy.connect_with_mysql.services;
 
+import com.greenfoxacademy.connect_with_mysql.models.Assignee;
 import com.greenfoxacademy.connect_with_mysql.models.Todo;
+import com.greenfoxacademy.connect_with_mysql.repositiories.AssigneeRepository;
 import com.greenfoxacademy.connect_with_mysql.repositiories.TodoRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,19 +13,26 @@ import org.springframework.stereotype.Service;
 public class TodoService {
 
   private TodoRepository todoRepository;
+  private AssigneeRepository assigneeRepository;
 
-  public TodoService(TodoRepository todoRepository) {
+  public TodoService(TodoRepository todoRepository, AssigneeRepository assigneeRepository) {
+    this.assigneeRepository = assigneeRepository;
     this.todoRepository = todoRepository;
   }
 
-  public Iterable<Todo> fullList() {
+  public Iterable<Todo> fullListOfTodo() {
     List<Todo> fullList = this.todoRepository.findAll();
+    return fullList;
+  }
+
+  public Iterable<Assignee> fullListOfAssignee() {
+    List<Assignee> fullList = this.assigneeRepository.findAll();
     return fullList;
   }
 
   public Iterable<Todo> showActiveTodos(boolean task) {
     List<Todo> activeList = new ArrayList<>();
-    for (Todo t : fullList()) {
+    for (Todo t : fullListOfTodo()) {
       if (t.isDone() != task) {
         activeList.add(t);
       }
@@ -35,8 +44,16 @@ public class TodoService {
     this.todoRepository.save(todo);
   }
 
+  public void addAssignee(Assignee assignee) {
+    this.assigneeRepository.save(assignee);
+  }
+
   public void deleteTodo(long id) {
     this.todoRepository.deleteById(id);
+  }
+
+  public void deleteAssignee(long id) {
+    this.assigneeRepository.deleteById(id);
   }
 
   public Todo editTodo(long id) {
@@ -45,5 +62,35 @@ public class TodoService {
       return currentTodo.get();
     }
     return null;
+  }
+
+  public Assignee editAssignee(long id) {
+    Optional<Assignee> currentAssignee = this.assigneeRepository.findById(id);
+    if (currentAssignee.isPresent()) {
+      return currentAssignee.get();
+    }
+    return null;
+  }
+
+  public List<Todo> searching(String type, String content){
+    if(type.equals("title")){
+      return this.todoRepository.findAllByTitleContains(content);
+    }
+    if(type.equals("content")){
+      return this.todoRepository.findAllByContentContains(content);
+    }
+    if(type.equals("description")){
+      return this.todoRepository.findAllByDescriptionContains(content);
+    }
+    return this.todoRepository.findAll();
+  }
+
+  public void addTodoToAssignee(Assignee assignee, Todo todo){
+    todo.setAssignee(assignee);
+    List<Todo> assigneeTodos = assignee.getTodos();
+    assigneeTodos.add(todo);
+    assignee.setTodos(assigneeTodos);
+    this.assigneeRepository.save(assignee);
+    this.todoRepository.save(todo);
   }
 }

@@ -17,5 +17,9 @@
     <button type="submit">Submit</button>
     <a href="/todo">Cancel</a>
 </form>
+<p>Assignees</p>
+<select>
+    <option th:each="asg : ${assignee}" th:text="${asg.getName()}"></option>
+</select>
 </body>
 </html>

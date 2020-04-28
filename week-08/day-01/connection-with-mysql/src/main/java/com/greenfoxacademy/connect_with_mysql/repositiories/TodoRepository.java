@@ -9,4 +9,8 @@ import org.springframework.stereotype.Repository;
 public interface TodoRepository extends CrudRepository<Todo, Long> {
 
   List<Todo> findAll();
+
+  List<Todo> findAllByTitleContains(String title);
+  List<Todo> findAllByContentContains(String content);
+  List<Todo> findAllByDescriptionContains(String description);
 }
