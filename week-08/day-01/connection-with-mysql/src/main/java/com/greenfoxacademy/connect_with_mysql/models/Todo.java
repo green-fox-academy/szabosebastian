@@ -1,5 +1,6 @@
 package com.greenfoxacademy.connect_with_mysql.models;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -22,6 +23,8 @@ public class Todo {
   private String description;
   private boolean urgent;
   private boolean done;
+
+  private String dueDate;
 
   @CreationTimestamp
   @Temporal(TemporalType.TIME)
@@ -49,6 +52,23 @@ public class Todo {
     this.description = description;
     this.urgent = urgent;
     this.done = done;
+  }
+
+  public Todo(String title, String content, String description, boolean urgent, boolean done, String dueDate) {
+    this.title = title;
+    this.content = content;
+    this.description = description;
+    this.urgent = urgent;
+    this.done = done;
+    this.dueDate = dueDate;
+  }
+
+  public String getDueDate() {
+    return dueDate;
+  }
+
+  public void setDueDate(String dueDate) {
+    this.dueDate = dueDate;
   }
 
   public Assignee getAssignee() {
@@ -114,4 +134,14 @@ public class Todo {
   public void setDone(boolean done) {
     this.done = done;
   }
+
+/*  public void setDateOfDueWithStringParameter(String dueDate) {
+    try {
+      SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+      this.setDueDate(format.parse(dueDate));
+    } catch (Exception e) {
+      System.out.println("Failed date parsing");
+      System.exit(-1);
+    }
+  }*/
 }

@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Thymeleaf Exercise #</title>
-    <link rel="stylesheet" th:href="@{/style.css}" />
-    <meta charset="utf-8" />
+    <link rel="stylesheet" th:href="@{/style.css}"/>
+    <meta charset="utf-8"/>
 </head>
 <body>
 <h1 th:text="${todo.getTitle()}"></h1>
@@ -18,6 +18,7 @@
         <td th:text="${todo.getId()}"></td>
         <td th:text="${todo.isUrgent()}"></td>
         <td th:text="${todo.isDone()}"></td>
+        <td th:text="${todo.getAssignee().getName()}"></td>
     </tr>
 </table>
 </body>

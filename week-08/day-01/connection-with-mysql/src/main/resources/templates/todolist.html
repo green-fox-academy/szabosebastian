@@ -10,9 +10,12 @@
 <a href="/todo/add">Add new todo</a> <a href="/assignee">List of Assignees</a>
 <form action="/search" method="post">
     <select name="select">
-        <option value="title">title</option>
-        <option value="content">content</option>
-        <option value="description">description</option>
+        <option value="title">Title</option>
+        <option value="content">Content</option>
+        <option value="description">Description</option>
+        <option value="dueDate">Due Date</option>
+        <option value="creationDate">Creation Date</option>
+        <option value="assignee">Assignee</option>
     </select>
     <input type="text" placeholder="Search.." name="search">
 </form>
@@ -25,6 +28,7 @@
         <td>URGENT</td>
         <td>DONE</td>
         <td>CREATED TIME</td>
+        <td>DUE TIME</td>
         <td>ASSIGNEE</td>
         <td>DELETE</td>
         <td>EDIT</td>
@@ -37,8 +41,9 @@
         <td th:text="${todo.isUrgent()}"></td>
         <td th:text="${todo.isDone()}"></td>
         <td th:text="${todo.getCreatedDate()}"></td>
+        <td th:text="${todo.getDueDate()}"></td>
         <td th:if="${todo.getAssignee() != null}" ><a th:text="${todo.getAssignee().getName()}" th:href="'assignee/' + ${todo.getAssignee().getId()}+ '/' + ${todo.getAssignee().getName()}"></a></td>
-        <td th:if="${todo.getAssignee() == null}" th:text="|No Assignee selected|"></td>
+        <td th:unless="${todo.getAssignee() != null}" th:text="|No Assignee selected|"></td>
         <td><a th:href="'todo/'+${todo.getId()}+'/delete'">delete</a></td>
         <td><a th:href="'todo/'+${todo.getId()}+'/edit'">edit</a></td>
     </tr>

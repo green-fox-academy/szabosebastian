@@ -55,31 +55,31 @@ public class TodoController {
   @GetMapping("todo/{id}/edit")
   public String editTodoView(@PathVariable("id") long id, Model model) {
     model.addAttribute("todo", this.todoService.editTodo(id));
-    model.addAttribute("assignee",this.todoService.fullListOfAssignee());
+    model.addAttribute("assignee", this.todoService.fullListOfAssignee());
     return "edit_todo";
   }
 
   @PostMapping("todo/{id}/edit")
   public String editTodo(@ModelAttribute Todo todo, @RequestParam(name = "selectid") long selectid) {
     this.todoService.addTodo(todo);
-    this.todoService.addTodoToAssignee(this.todoService.editAssignee(selectid),todo);
+    this.todoService.addTodoToAssignee(this.todoService.editAssignee(selectid), todo);
     return "redirect:/todo";
   }
 
   @GetMapping("todo/{id}/{title}")
-  public String showInformation(@PathVariable("id") long id, Model model){
-    model.addAttribute("todo",this.todoService.editTodo(id));
-    return "info";
+  public String showInformation(@PathVariable("id") long id, Model model) {
+    model.addAttribute("todo", this.todoService.editTodo(id));
+    return "todo_info";
   }
 
   @PostMapping("/search")
-  public String search(@RequestParam (value = "search") String searchbar, @RequestParam(value = "select") String selectValue, Model model){
-    model.addAttribute("todos", this.todoService.searching(selectValue,searchbar));
+  public String search(@RequestParam(value = "search") String searchbar, @RequestParam(value = "select") String selectValue, Model model) {
+    model.addAttribute("todos", this.todoService.searching(selectValue, searchbar));
     return "todolist";
   }
 
   @GetMapping("/assignee")
-  public String showAssigneeList(Model model){
+  public String showAssigneeList(Model model) {
     model.addAttribute("assignee", this.todoService.fullListOfAssignee());
     return "assignee";
   }
@@ -114,15 +114,15 @@ public class TodoController {
     return "redirect:/assignee";
   }
 
-  @GetMapping("add-assignee-to-todo/{todoId}/{assigneeId}")
-  public String addAssigneeToTodo(@PathVariable(name = "todoId") long todoId, @PathVariable(name = "assigneeId") long assigneeId){
+/*  @GetMapping("add-assignee-to-todo/{todoId}/{assigneeId}")
+  public String addAssigneeToTodo(@PathVariable(name = "todoId") long todoId, @PathVariable(name = "assigneeId") long assigneeId) {
     this.todoService.addTodoToAssignee(this.todoService.editAssignee(assigneeId), this.todoService.editTodo(todoId));
     return "redirect:/todo";
-  }
+  }*/
 
   @GetMapping("assignee/{id}/{title}")
-  public String showAssigneInformation(@PathVariable("id") long id, Model model){
-    model.addAttribute("assignee",this.todoService.editAssignee(id));
+  public String showAssigneInformation(@PathVariable("id") long id, Model model) {
+    model.addAttribute("assignee", this.todoService.editAssignee(id));
     return "assignee_info";
   }
 

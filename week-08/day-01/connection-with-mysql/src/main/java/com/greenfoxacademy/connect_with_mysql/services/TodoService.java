@@ -4,6 +4,7 @@ import com.greenfoxacademy.connect_with_mysql.models.Assignee;
 import com.greenfoxacademy.connect_with_mysql.models.Todo;
 import com.greenfoxacademy.connect_with_mysql.repositiories.AssigneeRepository;
 import com.greenfoxacademy.connect_with_mysql.repositiories.TodoRepository;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -72,21 +73,31 @@ public class TodoService {
     return null;
   }
 
-  public List<Todo> searching(String type, String content){
-    if(type.equals("title")){
+  public List<Todo> searching(String type, String content) {
+    if (type.equals("title")) {
       return this.todoRepository.findAllByTitleContains(content);
     }
-    if(type.equals("content")){
+    if (type.equals("content")) {
       return this.todoRepository.findAllByContentContains(content);
     }
-    if(type.equals("description")){
+    if (type.equals("description")) {
       return this.todoRepository.findAllByDescriptionContains(content);
+    }
+    if (type.equals("dueDate")) {
+      return this.todoRepository.findAllByDueDate(content);
+    }
+    if (type.equals("creationDate")) {
+      return this.todoRepository.findAllByCreatedDate(content);
+    }
+    if (type.equals("assignee")) {
+      return this.todoRepository.findAllByAssigneeName(content);
     }
     return this.todoRepository.findAll();
   }
 
-  public void addTodoToAssignee(Assignee assignee, Todo todo){
+  public void addTodoToAssignee(Assignee assignee, Todo todo) {
     todo.setAssignee(assignee);
+    todo.setCreatedDate(new Date());
     List<Todo> assigneeTodos = assignee.getTodos();
     assigneeTodos.add(todo);
     assignee.setTodos(assigneeTodos);
