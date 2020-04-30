@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Reddit Exerecise</title>
+    <link rel="stylesheet" href="/style.css"/>
+    <meta charset="utf-8"/>
+</head>
+<body>
+<a href="/submit">Submit new post</a>
+<h1>Index</h1>
+<table>
+    <tr th:each="p : ${post}" th:object="${p}">
+        <td th:text="*{counter}"></td>
+        <form th:action="'/plus/'+*{id}" method="post">
+            <td><a th:href="'/plus/'+*{id}">+</a></td>
+        </form>
+        <form th:action="'/minus/'+*{id}" method="post">
+            <td><a th:href="'/minus/'+*{id}">-</a></td>
+        </form>
+        <td><a target="_blank" th:text="*{title}" th:href="'http://' + *{url_link}"></a></td>
+        <td th:text="*{createdDate}"></td>
+    </tr>
+</table>
+<table>
+    <tr><a href="/orderbydate">Full list order by date</a></tr>
+    <tr><a href="/orderbydesctitle">Full list order by desc title</a></tr>
+</table>
+</body>
+</html>
