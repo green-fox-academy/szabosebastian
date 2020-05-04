@@ -2,9 +2,11 @@ package com.greenfoxacademy.reddit.models;
 
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.hibernate.annotations.CreationTimestamp;
@@ -23,6 +25,9 @@ public class Post {
   @Temporal(TemporalType.DATE)
   private Date createdDate;
 
+  @ManyToOne(fetch = FetchType.EAGER)
+  private User user;
+
   public Post() {
   }
 
@@ -30,6 +35,14 @@ public class Post {
     this.createdDate = new Date();
     this.title = title;
     this.url_link = url_link;
+  }
+
+  public User getUser() {
+    return user;
+  }
+
+  public void setUser(User user) {
+    this.user = user;
   }
 
   public long getId() {

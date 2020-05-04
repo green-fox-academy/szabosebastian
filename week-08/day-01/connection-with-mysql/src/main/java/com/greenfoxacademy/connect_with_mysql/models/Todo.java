@@ -135,7 +135,7 @@ public class Todo {
     this.done = done;
   }
 
-/*  public void setDateOfDueWithStringParameter(String dueDate) {
+  /*public void setDateOfDueWithStringParameter(String dueDate) {
     try {
       SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
       this.setDueDate(format.parse(dueDate));
