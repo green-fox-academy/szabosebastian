@@ -4,6 +4,7 @@ import com.greenfoxacademy.backend_api_exercise.models.AllLogs;
 import com.greenfoxacademy.backend_api_exercise.models.DoUntil;
 import com.greenfoxacademy.backend_api_exercise.models.NumberResult;
 import com.greenfoxacademy.backend_api_exercise.models.SpecificNumber;
+import com.greenfoxacademy.backend_api_exercise.models.Text;
 import com.greenfoxacademy.backend_api_exercise.models.What;
 import com.greenfoxacademy.backend_api_exercise.services.MainService;
 import java.io.IOException;
@@ -77,8 +78,8 @@ public class MainController {
 
   @ResponseBody
   @PostMapping("/arrays")
-  public ResponseEntity<?> arrays(@RequestBody What what, HttpServletRequest inputValue) throws IOException {
-    this.mainService.saveLog(this.mainService.createLog(inputValue.getServletPath(), body));
+  public ResponseEntity<?> arrays(@RequestBody What what, HttpServletRequest inputValue) {
+    this.mainService.saveLog(this.mainService.createLog(inputValue.getServletPath(), "what: "+ what.getWhat() + " numbers: " + what.getNumbers()));
     return ResponseEntity.ok().body(this.mainService.arraysCalc(what));
   }
 
@@ -86,5 +87,11 @@ public class MainController {
   @GetMapping("/log")
   public ResponseEntity<?> showDataFromDatabase() {
     return ResponseEntity.ok().body(this.mainService.listFullLogs());
+  }
+
+  @ResponseBody
+  @PostMapping("/sith")
+  public ResponseEntity<?> switchEveryTwoWord(@RequestBody Text text){
+    return ResponseEntity.ok().body(this.mainService.editingText(text));
   }
 }
