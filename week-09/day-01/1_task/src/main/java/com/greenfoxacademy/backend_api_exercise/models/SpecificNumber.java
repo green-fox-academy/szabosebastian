@@ -2,20 +2,20 @@ package com.greenfoxacademy.backend_api_exercise.models;
 
 public class SpecificNumber {
 
-  private Integer number;
+  private Integer until;
 
-  public SpecificNumber(Integer number) {
-    this.number = number;
+  public SpecificNumber(Integer until) {
+    this.until = until;
   }
 
   public SpecificNumber() {
   }
 
-  public Integer getNumber() {
-    return number;
+  public Integer getUntil() {
+    return until;
   }
 
-  public void setNumber(Integer number) {
-    this.number = number;
+  public void setUntil(Integer until) {
+    this.until = until;
   }
 }

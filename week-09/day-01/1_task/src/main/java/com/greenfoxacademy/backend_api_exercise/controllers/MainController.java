@@ -1,8 +1,15 @@
 package com.greenfoxacademy.backend_api_exercise.controllers;
 
+import com.greenfoxacademy.backend_api_exercise.models.AllLogs;
 import com.greenfoxacademy.backend_api_exercise.models.DoUntil;
+import com.greenfoxacademy.backend_api_exercise.models.NumberResult;
 import com.greenfoxacademy.backend_api_exercise.models.SpecificNumber;
+import com.greenfoxacademy.backend_api_exercise.models.What;
 import com.greenfoxacademy.backend_api_exercise.services.MainService;
+import java.io.IOException;
+import java.util.stream.Collectors;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,10 +38,11 @@ public class MainController {
 
   @ResponseBody
   @GetMapping("/doubling")
-  public ResponseEntity<?> doubling(@RequestParam(name = "input", defaultValue = "0") int input) {
+  public ResponseEntity<?> doubling(@RequestParam(name = "input", defaultValue = "0") int input, HttpServletRequest inputValue) {
     if (input == 0) {
       return ResponseEntity.ok().body(this.mainService.doublingError());
     } else {
+      this.mainService.saveLog(this.mainService.createLog(inputValue.getServletPath(), inputValue.getQueryString()));
       return ResponseEntity.ok().body(this.mainService.receiveDoubleNumber(input));
     }
   }
@@ -42,22 +50,41 @@ public class MainController {
   @ResponseBody
   @GetMapping("/greeter")
   public ResponseEntity<?> greeting(@RequestParam(name = "name", required = false) String name,
-                                    @RequestParam(name = "title", required = false) String title) {
-    if(name == null || title == null){
-      return new ResponseEntity<>(this.mainService.greeterError(name,title), HttpStatus.BAD_REQUEST);
+                                    @RequestParam(name = "title", required = false) String title, HttpServletRequest inputValue) {
+    if (name == null || title == null) {
+      return new ResponseEntity<>(this.mainService.greeterError(name, title), HttpStatus.BAD_REQUEST);
     }
+    this.mainService.saveLog(this.mainService.createLog(inputValue.getServletPath(), inputValue.getQueryString()));
     return ResponseEntity.ok().body(this.mainService.greeting_new_member(name, title));
   }
 
   @ResponseBody
   @GetMapping("/appenda/{appendable}")
-  public ResponseEntity<?> appenda(@PathVariable("appendable") String appendValue){
+  public ResponseEntity<?> appenda(@PathVariable("appendable") String appendValue, HttpServletRequest inputValue) {
+    this.mainService.saveLog(this.mainService.createLog(inputValue.getServletPath(), "appended: " + this.mainService.appendAChar(appendValue).getAppended()));
     return ResponseEntity.ok().body(this.mainService.appendAChar(appendValue));
   }
 
   @ResponseBody
   @PostMapping("/dountil/{action}")
-  public ResponseEntity<?> doUntil(@PathVariable("action") String action, @RequestBody SpecificNumber specificNumber){
-    return ResponseEntity.ok().body(this.mainService.factUntil(action,specificNumber));
+  public ResponseEntity<?> doUntil(@PathVariable("action") String action, @RequestBody SpecificNumber specificNumber, HttpServletRequest inputValue) {
+    if (specificNumber.getUntil() == null) {
+      return ResponseEntity.ok().body(this.mainService.doublingError());
+    }
+    this.mainService.saveLog(this.mainService.createLog(inputValue.getServletPath(), "until: " + specificNumber.getUntil()));
+    return ResponseEntity.ok().body(new DoUntil(action, specificNumber.getUntil()));
+  }
+
+  @ResponseBody
+  @PostMapping("/arrays")
+  public ResponseEntity<?> arrays(@RequestBody What what, HttpServletRequest inputValue) throws IOException {
+    this.mainService.saveLog(this.mainService.createLog(inputValue.getServletPath(), body));
+    return ResponseEntity.ok().body(this.mainService.arraysCalc(what));
+  }
+
+  @ResponseBody
+  @GetMapping("/log")
+  public ResponseEntity<?> showDataFromDatabase() {
+    return ResponseEntity.ok().body(this.mainService.listFullLogs());
   }
 }
