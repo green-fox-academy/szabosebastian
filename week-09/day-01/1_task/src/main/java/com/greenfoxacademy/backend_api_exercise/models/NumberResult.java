@@ -3,6 +3,9 @@ package com.greenfoxacademy.backend_api_exercise.models;
 public class NumberResult {
   private int result;
 
+  public NumberResult() {
+  }
+
   public NumberResult(What what) {
     if(what.getWhat().equals("sum")){
       int temp_result = 0;

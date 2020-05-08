@@ -2,47 +2,105 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Reddit Exerecise</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="/style.css"/>
     <meta charset="utf-8"/>
 </head>
 <body>
-<a href="/submit">Submit new post</a>
-<a href="/login">Login</a>
-<a href="/logout">Logout</a>
-<a href="/"><h1>Index</h1></a>
-<form action="/" method="post">
-    <select name="selectuser">
-        <option th:each="userlist : ${users}" th:text="${userlist.getName()}" th:value="${userlist.getId()}"></option>
-    </select>
-    <button type="submit">Submit</button>
-</form>
-<table>
-    <tr th:each="p : ${post}" th:object="${p}">
-        <td th:text="*{counter}"></td>
-        <form th:action="'/plus/'+*{id}" method="post">
-            <td><a th:href="'/plus/'+*{id}">+</a></td>
-        </form>
-        <form th:action="'/minus/'+*{id}" method="post">
-            <td><a th:href="'/minus/'+*{id}">-</a></td>
-        </form>
-        <td><a target="_blank" th:text="*{title}" th:href="'http://' + *{url_link}"></a></td>
-        <td th:text="*{createdDate}"></td>
-        <td th:if="${p.getUser() != null}"><a th:text="${p.getUser().getName()}"></a></td>
-        <td th:unless="${p.getUser() != null}" th:text="|Created by Anonimus|"></td>
-    </tr>
-</table>
-<p>User info</p>
-<table>
-    <tr th:each="user : ${user}" th:object="${user}">
-        <td th:text="*{name}"></td>
-    </tr>
-</table>
-<div class="pagination">
-    <a href="#">&laquo;</a>
-    <a href="/1">1</a>
-    <a href="/2">2</a>
-    <a href="/3">3</a>
-    <a href="#">&raquo;</a>
+<div class="container-fluid">
+    <div class="row ">
+        <div class="col">
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/">Index</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/submit">Submit new post</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
+                <li>
+
+                </li>
+            </ul>
+        </div>
+        <div class="col-2 align-self-end">
+            <table class="table table-dark">
+                <tr th:each="user : ${user}" th:object="${user}">
+                    <td>Login as:</td>
+                    <td th:text="*{name}"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2 align-self-start">
+            <form action="/" method="post">
+                <div class="input-group">
+                    <select class="custom-select" name="selectuser" id="inputGroupSelect04"
+                            aria-label="Example select with button addon">
+                        <option th:each="userlist : ${users}" th:text="${userlist.getName()}"
+                                th:value="${userlist.getId()}"></option>
+                    </select>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <tr>
+                    <th>Upvote</th>
+                    <th>+</th>
+                    <th>-</th>
+                    <th>URL</th>
+                    <th>Date</th>
+                    <th>Posted By</th>
+                </tr>
+                <tr th:each="p : ${post}" th:object="${p}">
+                    <td th:text="*{counter}"></td>
+                    <form th:action="'/plus/'+*{id}" method="post">
+                        <td><a th:href="'/plus/'+*{id}">+</a></td>
+                    </form>
+                    <form th:action="'/minus/'+*{id}" method="post">
+                        <td><a th:href="'/minus/'+*{id}">-</a></td>
+                    </form>
+                    <td><a target="_blank" th:text="*{title}" th:href="'http://' + *{url_link}"></a></td>
+                    <td th:text="*{createdDate}"></td>
+                    <td th:if="${p.getUser() != null}"><a th:text="${p.getUser().getName()}"></a></td>
+                    <td th:unless="${p.getUser() != null}" th:text="|Created by Anonimus|"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="/1">1</a></li>
+                    <li class="page-item"><a class="page-link" href="/2">2</a></li>
+                    <li class="page-item"><a class="page-link" href="/3">3</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
 </body>
 </html>
