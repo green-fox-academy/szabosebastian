@@ -1,4 +1,4 @@
-package com.greenfoxacademy.i_am_groot.controllers;
+package com.greenfoxacademy.i_am_groot.integration;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -56,4 +56,14 @@ public class GuardianControllerTest {
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
         .andExpect(jsonPath("error",is("Paramater required!")));
   }
+
+  @Test
+  public void shipStatusMissingParamater() throws Exception {
+    mockMvc.perform(get("/rocket/fill?caliber=.50&amount=0"))
+        .andExpect(status().isBadRequest())
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+        .andExpect(jsonPath("error",is("Paramater required!")));
+  }
+
+
 }
