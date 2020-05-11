@@ -6,14 +6,16 @@ import com.greenfoxacademy.backend_api_exercise.models.Log;
 import com.greenfoxacademy.backend_api_exercise.models.MyError;
 import com.greenfoxacademy.backend_api_exercise.models.DoubleNumber;
 import com.greenfoxacademy.backend_api_exercise.models.Greeting;
-import com.greenfoxacademy.backend_api_exercise.models.NewText;
 import com.greenfoxacademy.backend_api_exercise.models.NumberResult;
 import com.greenfoxacademy.backend_api_exercise.models.NumberResultInArray;
+import com.greenfoxacademy.backend_api_exercise.models.SithText;
 import com.greenfoxacademy.backend_api_exercise.models.Text;
 import com.greenfoxacademy.backend_api_exercise.models.What;
 import com.greenfoxacademy.backend_api_exercise.repositories.LogRepository;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -67,39 +69,69 @@ public class MainService {
     return null;
   }
 
-  public Log createLog(String mapping_name, String data){
+  public Log createLog(String mapping_name, String data) {
     return new Log(mapping_name, data);
   }
 
-  public void saveLog(Log log){
+  public void saveLog(Log log) {
     this.logRepository.save(log);
   }
 
-  public AllLogs listFullLogs(){
+  public AllLogs listFullLogs() {
     List<Log> allLogs = new ArrayList<>();
-    for (Log g:this.logRepository.findAll()) {
+    for (Log g : this.logRepository.findAll()) {
       allLogs.add(g);
     }
     return new AllLogs(allLogs);
   }
 
-  public NewText editingText(Text text){
-    String result = null;
-    String[] sentenceArray = text.getText().split(".");
+  public SithText editingText(Text text) {
+    String[] sentenceArray = text.getText().split("\\.");
+    List<String> sentencesList = new ArrayList<>();
+    List<String> resultList = new ArrayList<>();
+    List<String> finalResultList = new ArrayList<>();
+    List<String> randomStrings = Arrays.asList("Uhmm.", "Err..err.er.", "Arrgh.");
+    String finalResult = "";
+
     for (int i = 0; i < sentenceArray.length; i++) {
-      String[] textArray = sentenceArray[i].split(" ");
-      for (int j = 0; j < textArray.length - 1; j = j + 2) {
-        String hold = textArray[j];
-        textArray[j] = textArray[j+1];
-        textArray[j+1] = hold;
+      sentencesList.add(sentenceArray[i]);
+    }
+    for (String s : sentencesList) {
+      String[] textArray = s.trim().toLowerCase().split(" ");
+      if (textArray.length % 2 == 0) {
+        for (int j = 0; j < textArray.length - 1; j = j + 2) {
+          String hold = textArray[j];
+          textArray[j] = textArray[j + 1];
+          textArray[j + 1] = hold;
+        }
+      } else {
+        for (int j = 0; j < textArray.length - 2; j = j + 2) {
+          String hold = textArray[j];
+          textArray[j] = textArray[j + 1];
+          textArray[j + 1] = hold;
+        }
       }
-      for (String asd:textArray) {
-        System.out.print(asd+" ");
-      }
-      for (String asd:sentenceArray) {
-        System.out.print(asd+" ");
+      textArray[0] = textArray[0].substring(0, 1).toUpperCase() + textArray[0].substring(1);
+      String[] addDotArray = Arrays.copyOf(textArray, textArray.length + 1);
+      addDotArray[addDotArray.length - 1] = ".";
+      for (int i = 0; i < addDotArray.length; i++) {
+        resultList.add(addDotArray[i]);
       }
     }
-    return new NewText(sentenceArray.toString());
+    for (int i = 0; i < resultList.size(); i++) {
+      if (resultList.get(i).equals(".")) {
+        Random random = new Random();
+        int randomNumber = random.nextInt(3);
+        finalResultList.add(resultList.get(i));
+        finalResultList.add(randomStrings.get(randomNumber));
+      } else {
+        finalResultList.add(resultList.get(i));
+      }
+    }
+
+    for (int i = 0; i < finalResultList.size(); i++) {
+      finalResult += finalResultList.get(i) + " ";
+    }
+    return new SithText(finalResult.replace(" .", "."));
   }
 }

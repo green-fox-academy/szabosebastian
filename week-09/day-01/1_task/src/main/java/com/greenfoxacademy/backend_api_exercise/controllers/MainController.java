@@ -2,6 +2,7 @@ package com.greenfoxacademy.backend_api_exercise.controllers;
 
 import com.greenfoxacademy.backend_api_exercise.models.AllLogs;
 import com.greenfoxacademy.backend_api_exercise.models.DoUntil;
+import com.greenfoxacademy.backend_api_exercise.models.MyError;
 import com.greenfoxacademy.backend_api_exercise.models.NumberResult;
 import com.greenfoxacademy.backend_api_exercise.models.SpecificNumber;
 import com.greenfoxacademy.backend_api_exercise.models.Text;
@@ -92,6 +93,9 @@ public class MainController {
   @ResponseBody
   @PostMapping("/sith")
   public ResponseEntity<?> switchEveryTwoWord(@RequestBody Text text){
-    return ResponseEntity.ok().body(this.mainService.editingText(text));
+    if(text.getText() != null) {
+      return ResponseEntity.ok().body(this.mainService.editingText(text));
+    }
+    return ResponseEntity.ok().body(new MyError("Feed me some text you have to, padawan young you are. Hmmm."));
   }
 }
