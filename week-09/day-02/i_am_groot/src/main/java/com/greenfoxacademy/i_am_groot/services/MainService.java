@@ -17,6 +17,9 @@ public class MainService {
 
   private FoodRepository foodRepository;
 
+  public MainService() {
+  }
+
   public MainService(FoodRepository foodRepository) {
     this.foodRepository = foodRepository;
   }

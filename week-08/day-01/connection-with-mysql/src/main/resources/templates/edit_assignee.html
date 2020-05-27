@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1>Edit Assignee</h1>
-<form th:object="${asg}" th:action="@{'/assignee/'+${asg.getId()}+'/edit'}" method="post">
+<form  th:action="@{'/assignee/'+${asg.getId()}+'/edit'}" th:object="${asg}" method="post">
     <label>Edit name</label>
     <input type="text" th:field="*{name}" th:value="*{name}"><br>
     <label>Edit email</label>
