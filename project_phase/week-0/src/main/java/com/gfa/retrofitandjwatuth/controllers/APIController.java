@@ -2,6 +2,7 @@ package com.gfa.retrofitandjwatuth.controllers;
 
 import com.gfa.retrofitandjwatuth.models.AuthenticationRequest;
 import com.gfa.retrofitandjwatuth.models.AuthenticationResponse;
+import com.gfa.retrofitandjwatuth.models.User;
 import com.gfa.retrofitandjwatuth.services.MyUserDetailsService;
 import com.gfa.retrofitandjwatuth.services.PersonService;
 import com.gfa.retrofitandjwatuth.util.JwtUtil;
@@ -43,6 +44,11 @@ public class APIController {
   @GetMapping("/api/database")
   public ResponseEntity<?> fullDatabaseList() {
     return ResponseEntity.ok().body(personService.getFullPersonList());
+  }
+
+  @PostMapping("/register")
+  public ResponseEntity<?> saveUser(@RequestBody User user) throws Exception {
+    return ResponseEntity.ok(userDetailsService.save(user));
   }
 
   @PostMapping("/auth")
