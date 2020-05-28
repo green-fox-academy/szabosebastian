@@ -3,7 +3,14 @@ package com.gfa.retrofitandjwatuth.DTO;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 
+@Entity
 public class PersonDTO {
 
   @SerializedName("birthday")
@@ -14,21 +21,26 @@ public class PersonDTO {
   private String knownForDepartment;
   @SerializedName("deathday")
   @Expose
-  private Object deathday;
+  private String deathday;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @SerializedName("id")
   @Expose
   private Integer id;
   @SerializedName("name")
   @Expose
   private String name;
+  private String alsoKnownAsString;
   @SerializedName("also_known_as")
   @Expose
+  @Transient
   private List<String> alsoKnownAs = null;
   @SerializedName("gender")
   @Expose
   private Integer gender;
   @SerializedName("biography")
   @Expose
+  @Column(length = 1000)
   private String biography;
   @SerializedName("popularity")
   @Expose
@@ -47,7 +59,15 @@ public class PersonDTO {
   private String imdbId;
   @SerializedName("homepage")
   @Expose
-  private Object homepage;
+  private String homepage;
+
+  public String getAlsoKnownAsString() {
+    return alsoKnownAsString;
+  }
+
+  public void setAlsoKnownAsString(String alsoKnownAsString) {
+    this.alsoKnownAsString = alsoKnownAsString;
+  }
 
   public String getBirthday() {
     return birthday;
@@ -65,11 +85,11 @@ public class PersonDTO {
     this.knownForDepartment = knownForDepartment;
   }
 
-  public Object getDeathday() {
+  public String getDeathday() {
     return deathday;
   }
 
-  public void setDeathday(Object deathday) {
+  public void setDeathday(String deathday) {
     this.deathday = deathday;
   }
 
@@ -94,6 +114,7 @@ public class PersonDTO {
   }
 
   public void setAlsoKnownAs(List<String> alsoKnownAs) {
+
     this.alsoKnownAs = alsoKnownAs;
   }
 
@@ -153,11 +174,11 @@ public class PersonDTO {
     this.imdbId = imdbId;
   }
 
-  public Object getHomepage() {
+  public String getHomepage() {
     return homepage;
   }
 
-  public void setHomepage(Object homepage) {
+  public void setHomepage(String homepage) {
     this.homepage = homepage;
   }
 }
