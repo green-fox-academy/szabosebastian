@@ -1,13 +1,16 @@
 package com.gfa.retrofitandjwatuth.filters;
 
+import com.gfa.retrofitandjwatuth.exceptions.RestAuthenticationEntryPoint;
 import com.gfa.retrofitandjwatuth.services.MyUserDetailsService;
 import com.gfa.retrofitandjwatuth.util.JwtUtil;
 import java.io.IOException;
+import java.nio.file.AccessDeniedException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,29 +31,35 @@ public class JwtRequestFilter extends OncePerRequestFilter {
   @Override
   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
+
     final String authHeader = request.getHeader("Authorization");
 
     String username = null;
     String jwt = null;
 
-    if (authHeader != null && authHeader.startsWith("Bearer ")) {
-      jwt = authHeader.substring(7);
-      username = jwtUtil.extractUsername(jwt);
-    }
-
-    if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-
-      UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
-
-      if (jwtUtil.validateToken(jwt, userDetails)) {
-
-        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
-            userDetails, null, userDetails.getAuthorities());
-        usernamePasswordAuthenticationToken
-            .setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-        SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+    try {
+      if (authHeader != null && authHeader.startsWith("Bearer ")) {
+        jwt = authHeader.substring(7);
+        username = jwtUtil.extractUsername(jwt);
       }
+
+      if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+
+        UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
+
+        if (jwtUtil.validateToken(jwt, userDetails)) {
+
+          UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
+              userDetails, null, userDetails.getAuthorities());
+          usernamePasswordAuthenticationToken
+              .setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+          SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+        }
+      }
+      filterChain.doFilter(request, response);
+    } catch (Exception e){
+      System.out.println("TOKEN ERROR");
+      response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
     }
-    filterChain.doFilter(request, response);
   }
 }

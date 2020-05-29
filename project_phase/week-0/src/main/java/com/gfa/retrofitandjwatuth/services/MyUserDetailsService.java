@@ -31,6 +31,11 @@ public class MyUserDetailsService implements UserDetailsService {
   }
 
   public UserDTO save(User user) {
+    for (UserDTO u:userRepository.findAllBy()) {
+      if(u.getUsername().equals(user.getUsername())){
+        return userRepository.save(u);
+      }
+    }
     UserDTO newUser = new UserDTO();
     newUser.setUsername(user.getUsername());
     newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
